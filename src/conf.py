@@ -10,17 +10,17 @@ sys.path.append(os.path.abspath('../exts'))
 # Customize for the specific site. Any options in the html_theme_options
 # dictionary below may be overriden here
 site_theme_options = {
-    'navbar_title': 'Curriculum Book',
+    'navbar_title': 'Microsoft Azure',
     'navbar_site_name': "",
     'bootswatch_theme': 'launchcode',
 }
 
-project = 'LaunchCode Curriculum Book'
+project = 'Microsoft Azure'
 
 # -- Project information -----------------------------------------------------
 
 
-copyright = '2020, LaunchCode'
+copyright = '2020, Microsoft'
 author = 'LaunchCode'
 
 # The short X.Y version
@@ -39,7 +39,6 @@ extensions = [
     'youtube',
     'external_links',
     'admonition_icons',
-    'replit',
     'ordered_toctree',
 ]
 
@@ -49,10 +48,8 @@ replit_user = 'launchcode'
 templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
-source_suffix = ['.rst', '.md']
+source_suffix = ['.rst']
 
-# Configure markdown parsing
-source_parsers = {'.md': 'recommonmark.parser.CommonMarkParser'}
 
 html_copy_source = True
 html_show_sourcelink = True
@@ -177,7 +174,6 @@ htmlhelp_basename = 'CurriculumModuledoc'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
-
 
 def setup(app):
     app.add_stylesheet('fa/css/all.css')
