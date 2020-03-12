@@ -14,3 +14,4 @@ Chapters
    :hidden:
 
    index-full
+
