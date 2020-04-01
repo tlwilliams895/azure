@@ -24,7 +24,6 @@
   - clone -> publish -> run -> connect
 - more cloud, REST APIs
   - basic deployment of in-memory API
-    - startup seeds in memory db
     - just CE resource (no users / members)
   - script: unit file and nginx
   - clone -> publish -> run -> connect
@@ -145,6 +144,9 @@
 
 ## practical
 
+- How can you provision a VM from Azure?
+- How can you run scripts on a VM from the Azure web GUI?
+
 - walkthrough: how do you connect to a hosted server?
   - introduce basics of curl
   - local
@@ -231,12 +233,18 @@
 
 ## practical
 
-- How can you provision a VM from Azure?
-- How can you run scripts on a VM from the Azure web GUI?
-- How do you request a resource from a RESTful API?
-- How do you add a new resource to a RESTful API?
-- How do you update an existing resource of a RESTful API?
-- How do you remove an existing resource of a RESTful API?
+TODO: write in-memory API with just CE resource (branch or separate repo?)
+
+- studio: deploy API
+  - basic deployment of in-memory API
+    - just CE resource (no users / members)
+  - script: unit file and nginx
+    - nginx: TLS termination as a "black box"
+      - a program handling certificates for us
+      - do not go into RP or how it works
+    - unit file: standardized way of running a server process in linux
+      - do not go into detail of systemctl / service just syntax for usage
+  - clone -> publish -> run -> connect
 
 # Day 3 -- Secrets Management & Backing Services
 
