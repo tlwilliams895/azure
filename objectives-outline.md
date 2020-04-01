@@ -1,4 +1,100 @@
-# Day 1
+# assumptions
+
+- structure in place for students to have access to their own directories
+  - subscription / credits taken care of
+  - master account directory for instructor / TA to access the student directories
+- capable of using bash (git bash / terminal)
+  - basic fs navigation
+  - git
+  - dotnet
+- all students using identical semver of dotnet SDK
+- access to an in-memory version of an MVC or API application
+- bash script for setting up the VM (through azure VM portal)
+
+!! major blocker !!
+
+- students will have access to unix
+  - w10+ subsystem
+  - vm (too heavy)
+
+# overview
+
+- intro to cloud and
+  - basic deployment of in-memory MVC
+  - clone -> publish -> run -> connect
+- more cloud, REST APIs
+  - basic deployment of in-memory API
+    - startup seeds in memory db
+    - just CE resource (no users / members)
+  - script: unit file and nginx
+  - clone -> publish -> run -> connect
+- secrets management and backing services
+  - secrets management isolated example and deployment
+  - configuring API
+    - ef / mysql
+    - secrets
+    - still just CE resource (no users / members)
+  - update API deployment
+    - keyvault
+    - script: to install mysql and setup the db
+    - push -> clone -> publish -> run -> connect
+- oauth
+  - configuring API
+    - clone with additional models
+    - integrate adb2c (+ secrets)
+- authorization
+  - roles
+  - documentation / swagger
+  - final swagger endpoint for testing
+
+# topics to include
+
+- azure vm
+  - day 1 onwards
+  - dep: none
+  - dev:
+    - in-memory MVC
+    - API progression
+- REST / swagger
+  - day 2
+  - dep: none
+    - how to run without users?
+  - dev: in-memory API
+    - just CodeEvent resource
+    - no members or auth
+  - ops: basic VM
+- oauth / adb2c
+  - dep: keyvault
+    - complex, entire adb2c config
+  - dev:
+  - ops:
+- secrets management (isolated sample and explain other use cases)
+  - types
+    - local: user-secrets
+    - remote: keyvault
+  - dep: none
+  - dev: isolated example single endpoint API
+    - /db -> returns connection string secret
+      - with no secret: 404
+      - with secret: "connected to: <connection string>"
+    - returns value of a secret when requested
+      - local: from user-secrets
+      - remote: from keyvault
+  - ops:
+    - connection string API VM
+    - keyvault
+- backing service
+  - ef / mysql
+  - dep: keyvault
+    - simple, a connection string
+  - dev:
+  - ops:
+- roles
+  - dep: adb2c
+  - ops:
+  - dev: backed API
+
+# Day 1 - Intro to Azure & VMs
 
 ## conceptual
 
@@ -23,6 +119,7 @@
     - phone book analogy
     - do not get into resolution chaining
 - what allows dotnet to run on any OS?
+
   - published executable artifacts that can be run on any OS that has the dotnet runtime
     - publishing: compiling and packaging
   - SDK is needed to write and publish
@@ -31,6 +128,63 @@
     - SDK
     - JVM :: CLR
     - JRE :: VES
+
+- intro to azure
+  - overview of services well be using
+  - segue and focus on VM
+- what is a VM?
+  - simulated machine with its own operating system running on a physical machine
+  - can be rented from IaaS provider like azure
+  - provisioned and run on demand
+    - always on or as needed
+  - why VMs?
+    - powerful physical machines that can be subdivided
+    - parity and portability
+- how is a VM different than your local machine?
+  - the VM is a simulation that a physical machine runs
+
+## practical
+
+- walkthrough: how do you connect to a hosted server?
+  - introduce basics of curl
+  - local
+    - run a an app server and use browser / postman to make requests
+  - W/LAN
+    - instructor gets WLAN network IP, runs app, and shares with class to show access on a local network
+    - bonus: add entry to /etc/hosts to show domain resolution to the shared IP
+  - internet
+    - connect to portal.azure.com
+      - open dev tools and show the IP address
+- studio: publish -> run -> connect
+  - clone starter repo
+    - add an endpoint that says "you connected successfully!"
+      - endpoint that is curled for subsequent steps
+  - application locally
+    - CLI: publish -> run
+    - connect (local): curl
+  - clone friend repo locally
+    - CLI: clone -> publish -> run
+  - connect (local): curl
+  - clone repo remotely
+    - set up azure account / subscription
+    - set up VM
+    - run commands in VM console
+      - predefined
+        - setup script (dependencies)
+      - commands
+        - clone
+        - publish
+        - run
+        - curl
+          - to reinforce concept of control over VM (just like local machine)
+    - get public IP
+      - connect (remote): curl
+        - show connecting to a publicly hosted application
+
+# Day 2 -- IaaS and REST
+
+## conceptual
+
 - what is cloud hosting (IaaS)
   - infrastructure
     - powerful server machines organized into self-sustaining data centers
@@ -50,49 +204,59 @@
           - provisioning resources
           - maintaining uptime
           - managing redundancy
-  - mention azure as the IaaS of choice
-- what is a VM?
-  - simulated machine with its own operating system running on a physical machine
-  - can be rented from IaaS provider like azure
-  - provisioned and run on demand
-    - always on or as needed
-  - why VMs?
-    - powerful physical machines that can be subdivided
-    - parity and portability
-    - disposability and replication
+  - VM
     - allocate resources as needed
+    - disposability and replication
       - horizontal: replication
       - vertical: increasing allocation
       - scaling horizontal vs vertical (high level)
-- how is a VM different than your local machine?
-  - the VM is a simulation that a physical machine runs
+- what is a web API?
+  - an interface for controlled access and management of data (resources) over the web
+  - endpoints consisting of a path and a method
+    - each has some association with an action to take on data
+  - consumes and produces data (JSON)
+- what is the difference between an MVC application and a web API?
+  - MVC returns HTML the API returns data
+  - an API is agnostic to its front end consumer(s)
+  - pros/cons decoupling development and deployment of frontend and backend
+- What is REST?
+  - a specification for designing APIs with standardized navigation and behavior
+    - a standard that API consumers can rely on for consistent behavior
+    - represents access to resources by their endpoints
+      - collections and entity
+  - most common HTTP methods
+    - association with CRUD actions on data
+  - status code ranges and their meaning
+    - no specifics in the XX
 
 ## practical
 
-- how do you connect to a hosted server?
-  - local
-  - W/LAN
-  - internet
-- publish and run
-  - application locally
-  - clone friend repo locally
-  - clone repo remotely
-- set up azure account / subscription
-- basic in-memory application deployment
-  - accessing the hosted application through browser / postman
+- How can you provision a VM from Azure?
+- How can you run scripts on a VM from the Azure web GUI?
+- How do you request a resource from a RESTful API?
+- How do you add a new resource to a RESTful API?
+- How do you update an existing resource of a RESTful API?
+- How do you remove an existing resource of a RESTful API?
 
-## assumptions
+# Day 3 -- Secrets Management & Backing Services
 
-- structure in place for students to have access to their own directories
-  - subscription / credits taken care of
-  - master account directory for instructor / TA to access the student directories
-- capable of using bash (git bash / terminal) for basic CL navigation
-  - git CLI
-  - dotnet CLI
-- all students using identical semver of dotnet SDK
-- access to an in-memory version of an MVC or API application
-- bash script for setting up the VM (through azure VM portal)
+## conceptual
 
+- What
+
+## practical
+
+# Day 4 -- OAuth
+
+## conceptual
+
+## practical
+
+# Day 5 -- Authorization & Swagger
+
+## conceptual
+
+## practical
 
 # Day 2
 
