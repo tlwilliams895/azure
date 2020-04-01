@@ -92,3 +92,63 @@
 - all students using identical semver of dotnet SDK
 - access to an in-memory version of an MVC or API application
 - bash script for setting up the VM (through azure VM portal)
+
+
+# Day 2
+
+## conceptual
+
+### Azure Key Vault
+
+- What is sensitive data?
+- What data should be in VCS?
+- What data shouldn't be in VCS?
+- What is a runtime environment?
+- How can you inject variables into a runtime environment?
+  - What is Configuration["SomeKey"]?
+  - What is AppSettings.json?
+- What is the Azure Key Vault?
+- List three different ways to interface with the Azure Key Vault?
+  - azure portal
+  - dotnet
+  - terminal (azure-cli)
+- What are some examples of data you might keep in Azure Key Vault?
+  - db config data
+  - keys
+  - cloud hosting config data
+
+### Azure Active Directory B2C
+
+- What is authentication?
+- What is authorization?
+- What is identity?
+- What is OAuth 2.0 implicit flow?
+- What is a cookie?
+- What is AADB2C?
+- What process does AADB2C use to authenticate a user?
+- Conceptually, How does AADB2C notify an application, or API of a user's identity?
+- What is a claim in AADB2C?
+- How do you access a claim in dotnet?
+
+## practical
+
+### Azure Key Vault
+
+- How do you create a Key Vault?
+  - Azure Web GUI
+  - terminal (azure-cli)
+- How do you add items to a Key Vault?
+  - Azure Web GUI
+  - terminal (azure-cli)
+- How do you access (READ) items in a Key Vault?
+  - dotnet framework
+  - Azure Web GUI
+  - terminal (azure-cli)
+- How do you connect a Key Vault to a dotnet project?
+  - whatever dependencies, and configs that need to be added to a project
+
+### Azure Active Directory B2C
+
+- How do you setup a dotnet application to use AADB2C to handle authentication?
+- How do you access the identity of a user after they authenticate via AADB2C?
+- How can you use the identity of a user to determine if they are authorized to access a resource?
