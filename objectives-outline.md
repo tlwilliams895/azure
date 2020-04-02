@@ -93,6 +93,25 @@
   - ops:
   - dev: backed API
 
+# Setup
+
+## programs
+
+- CLI
+  - dotnet
+  - azure
+- GUI
+  - firefox
+  - postman
+
+## linux subsystem
+
+- https://docs.microsoft.com/en-us/windows/wsl/install-win10
+  - https://docs.microsoft.com/en-us/windows/wsl/initialize-distro
+  - ubuntu 18.04
+
+TODO: lookup instructions guide / video for setup
+
 # Day 1 - Intro to Azure & VMs
 
 ## conceptual
@@ -248,41 +267,54 @@
 
 ## conceptual
 
+- what is an application environment?
+  - the environment the application runs in including external variables
+  - why use environments instead of hard-coding?
+    - parity and portability
+      - why do we have multiple application environments
+        - difference between dev/testing/prod
+      - only modify application environment config rather than internal code
+    - protect sensitive data
 - What is sensitive data?
-- What data should be in VCS?
-- What data shouldn't be in VCS?
+  - credentials and other non-public variables that the application uses
+  - why store sensitive data separate from the application source code?
+    - prevent publicizing the information
+- What information should and shouldn't be in git?
+  - include
+    - source code
+    - public configuration (appsettings.json)
+  - exclude
+    - derived code (libraries, published package)
+    - sensitive data
+- what is a secrets manager?
+  - a tool that stores sensitive data outside of the source code
+  - local and remote tools available for dotnet projects
+    - stored in key:value entries
+      - objects are accessed using : notation for nesting
+    - local: user-secrets
+    - remote: keyvault
+      - What are some examples of data you might keep in Azure Key Vault?
+        - db config data
+        - keys
+        - cloud hosting config data
+  - Why do you use a secrets manager?
+    - for sensitive external configuration
 - What is the difference between a config file and a secrets manager?
-- Why do you use a secrets manager?
-- Why should you keep your secrets manager separate from your config file?
-- Why would you want to load external configurations into a project?
-  - protect sensitive data
-  - portability to multiple application environments
-  - parity
-    - what is an application environment
-    - why do we have multiple application environments
-      - difference between dev/testing/prod
-    - only modify application environment config rather than internal code
-- What is the difference between a configuration file, and a secrets manager?
-  - config file -> portability between application environments
-  - secrets manager -> handles and hides sensitive data
-- What secrets manager do you use locally?
-  - .NET user-secrets?
-- What is AppSettings.json used for?
-- What is the Azure Key Vault?
-- List three different ways to interface with the Azure Key Vault?
-  - azure portal
-  - dotnet
-  - terminal (azure-cli)
-- What are some examples of data you might keep in Azure Key Vault?
-  - db config data
-  - keys
-  - cloud hosting config data
+  - config: public data
+  - sm: private data
+- what are backing services?
+  - external services that the application depends on
+  - examples
+    - database
+    - logging
+    - caching
 
 ## practical
 
-- How do you add, list, and use secrets stored from a secrets manager?
-- How can you add, list, and use configurations from an external configuration file?
-
+- how do you access external configuration settings in your application?
+  - Startup -> Configuration.GetValue/Section or utility wrappers (GetConnectionString)
+    - "dot" notation using : for nesting
+- How do you add and list secrets stored in a secrets manager?
 - How do you create a Key Vault?
   - Azure Web GUI
   - terminal (azure-cli)
@@ -295,31 +327,109 @@
   - terminal (azure-cli)
 - How do you connect a Key Vault to a dotnet project?
   - whatever dependencies, and configs that need to be added to a project
+- How can you add and view configurations in appsettings.json?
 
-# Day 4 -- OAuth
+### studio
+
+- local
+  - !! must be in project directory !!
+  - configure user-secrets for project
+    - command: \$ dotnet user-secrets init
+    - describe what the secrets ID is and show where it is saved to (CodeEventsAPI.csproj)
+      - user secrets are defined per project
+  - create user-secrets entry
+    - command: \$ dotnet user-secrets set "ConnectionStrings:Default" "Server=localhost;Port=3306;Database=coding_events;User=coding_events;Password=password"
+      - note: the connection string label "Default" is arbitrary but must match how it is consumed in the application
+  - list user-secrets
+    - command: \$ dotnet user-secrets list
+- API
+  - branch: 2-mysql-start
+  - TODOs: assign the connection string from external configuration
+- remote
+  - azure portal (screenshots)
+    - create key vault
+    - add connection string
+    - assign VM identity
+    - grant VM identity access to key vault
+  - run scripts in VM
+    - docker -> mysql -> set environment for db setup
+    - update code in VM
+    - publish -> restart service -> connect
+
+# Day 4 -- ADB2C
 
 ## conceptual
 
-- What is authentication?
-- What is authorization?
-- What is identity?
-- What is OAuth 2.0 implicit flow?
-- What is a cookie?
+- visual oauth
+  - What is authentication?
+  - What is authorization?
+  - what is delegation?
 - What is AADB2C?
-- What process does AADB2C use to authenticate a user?
-- Conceptually, How does AADB2C notify an application, or API of a user's identity?
-- What is a claim in AADB2C?
-- How do you access a claim in dotnet?
+  - an oauth provider service
+  - what is OIDC?
+    - https://medium.com/@darutk/diagrams-of-all-the-openid-connect-flows-6968e3990660
+    - https://christianlydemann.com/implicit-flow-vs-code-flow-with-pkce/
+    - a wrapper around oauth that authorizes access to and packages a user identity
+    - What is OAuth 2.0 implicit flow?
+      - adb2c process diagram
+    - What is an identity token?
+      - a form of authentication
+      - a collection of data uniquely identifying a user in JWT format
+      - what is a JWT?
+        - a JSON object that has been encoded and signed
+        - signature: proof of authenticity
+        - encoding: compresses and separates the context of the JWT
+        - payload claims
+          - key value pairs: identity, authorization, and metadata
 
 ## practical
 
+### studio
 
-- How do you setup a dotnet application to use AADB2C to handle authentication?
-- How do you access the identity of a user after they authenticate via AADB2C?
-- How can you use the identity of a user to determine if they are authorized to access a resource?
+- azure
+  - how to configure an adb2c tenant
+  - how to link the adb2c tenant directory with your primary directory and subscription
+  - how to add and configure
+    - adb2c application
+      - redirect URIs
+        - local
+        - jwt.ms (for testing)
+        - remote (added later but point out location)
+      - api access / published scopes
+    - local account identity provider
+      - email vs username
+    - SUSI flow
+      - selecting a provider
+      - requested claims: user attributes
+        - custom claim (username)?
+      - provided claims: application claims
+  - how to get adb2c configuration data
+    - TenantId
+    - etc...
+- API
+  - add adb2c config to appsettings.json
+  - explore how users are registered in the db
+    - accessing claims
+- local
+  - publish and run
+  - azure
+    - adb2c directory
+    - adb2c
+    - user flows
+    - run user flow
+      - jwt.ms
+      - copy token
+    - postman
+      - open a request
+      - headers
+        - key: Authorization
+        - value: Bearer <copied token>
+- remote
+  - update code in VM
+  - publish -> run
+  - connection: repeat postman tests pointing at hosted API
 
-
-# Day 5 -- Authorization & Swagger
+# Day 5 -- [Next Steps] Authorization & Swagger
 
 ## conceptual
 
