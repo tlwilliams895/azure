@@ -250,28 +250,6 @@ TODO: write in-memory API with just CE resource (branch or separate repo?)
 
 ## conceptual
 
-- What
-
-## practical
-
-# Day 4 -- OAuth
-
-## conceptual
-
-## practical
-
-# Day 5 -- Authorization & Swagger
-
-## conceptual
-
-## practical
-
-# Day 2
-
-## conceptual
-
-### Azure Key Vault
-
 - What is sensitive data?
 - What data should be in VCS?
 - What data shouldn't be in VCS?
@@ -289,22 +267,7 @@ TODO: write in-memory API with just CE resource (branch or separate repo?)
   - keys
   - cloud hosting config data
 
-### Azure Active Directory B2C
-
-- What is authentication?
-- What is authorization?
-- What is identity?
-- What is OAuth 2.0 implicit flow?
-- What is a cookie?
-- What is AADB2C?
-- What process does AADB2C use to authenticate a user?
-- Conceptually, How does AADB2C notify an application, or API of a user's identity?
-- What is a claim in AADB2C?
-- How do you access a claim in dotnet?
-
 ## practical
-
-### Azure Key Vault
 
 - How do you create a Key Vault?
   - Azure Web GUI
@@ -319,8 +282,31 @@ TODO: write in-memory API with just CE resource (branch or separate repo?)
 - How do you connect a Key Vault to a dotnet project?
   - whatever dependencies, and configs that need to be added to a project
 
-### Azure Active Directory B2C
+# Day 4 -- OAuth
+
+## conceptual
+
+- What is authentication?
+- What is authorization?
+- What is identity?
+- What is OAuth 2.0 implicit flow?
+- What is a cookie?
+- What is AADB2C?
+- What process does AADB2C use to authenticate a user?
+- Conceptually, How does AADB2C notify an application, or API of a user's identity?
+- What is a claim in AADB2C?
+- How do you access a claim in dotnet?
+
+## practical
+
 
 - How do you setup a dotnet application to use AADB2C to handle authentication?
 - How do you access the identity of a user after they authenticate via AADB2C?
 - How can you use the identity of a user to determine if they are authorized to access a resource?
+
+
+# Day 5 -- Authorization & Swagger
+
+## conceptual
+
+## practical
