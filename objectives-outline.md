@@ -251,10 +251,23 @@
 - What is sensitive data?
 - What data should be in VCS?
 - What data shouldn't be in VCS?
-- What is a runtime environment?
-- How can you inject variables into a runtime environment?
-  - What is Configuration["SomeKey"]?
-  - What is AppSettings.json?
+- What is the difference between a config file and a secrets manager?
+- Why do you use a secrets manager?
+- Why should you keep your secrets manager separate from your config file?
+- Why would you want to load external configurations into a project?
+  - protect sensitive data
+  - portability to multiple application environments
+  - parity
+    - what is an application environment
+    - why do we have multiple application environments
+      - difference between dev/testing/prod
+    - only modify application environment config rather than internal code
+- What is the difference between a configuration file, and a secrets manager?
+  - config file -> portability between application environments
+  - secrets manager -> handles and hides sensitive data
+- What secrets manager do you use locally?
+  - .NET user-secrets?
+- What is AppSettings.json used for?
 - What is the Azure Key Vault?
 - List three different ways to interface with the Azure Key Vault?
   - azure portal
@@ -266,6 +279,9 @@
   - cloud hosting config data
 
 ## practical
+
+- How do you add, list, and use secrets stored from a secrets manager?
+- How can you add, list, and use configurations from an external configuration file?
 
 - How do you create a Key Vault?
   - Azure Web GUI
