@@ -233,8 +233,6 @@
 
 ## practical
 
-TODO: write in-memory API with just CE resource (branch or separate repo?)
-
 - studio: deploy API
   - basic deployment of in-memory API
     - just CE resource (no users / members)
