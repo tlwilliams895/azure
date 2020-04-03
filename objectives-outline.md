@@ -1,97 +1,63 @@
-# assumptions
+# requested changes
 
-- structure in place for students to have access to their own directories
-  - subscription / credits taken care of
-  - master account directory for instructor / TA to access the student directories
-- capable of using bash (git bash / terminal)
-  - basic fs navigation
-  - git
-  - dotnet
-- all students using identical semver of dotnet SDK
-- access to an in-memory version of an MVC or API application
-- bash script for setting up the VM (through azure VM portal)
-
-!! major blocker !!
-
-- students will have access to unix
-  - w10+ subsystem
-  - vm (too heavy)
+- swagger from beginning
 
 # overview
 
-- intro to cloud and
-  - basic deployment of in-memory MVC
-  - clone -> publish -> run -> connect
-- more cloud, REST APIs
-  - basic deployment of in-memory API
-    - just CE resource (no users / members)
-  - script: unit file and nginx
-  - clone -> publish -> run -> connect
-- secrets management and backing services
-  - secrets management isolated example and deployment
-  - configuring API
-    - ef / mysql
-    - secrets
-    - still just CE resource (no users / members)
-  - update API deployment
-    - keyvault
-    - script: to install mysql and setup the db
-    - push -> clone -> publish -> run -> connect
-- oauth
-  - configuring API
-    - clone with additional models
-    - integrate adb2c (+ secrets)
-- authorization
-  - roles
-  - documentation / swagger
-  - final swagger endpoint for testing
+## day 1: intro to hosting, azure and VMs
 
-# topics to include
+### conceptual
 
-- azure vm
-  - day 1 onwards
-  - dep: none
-  - dev:
-    - in-memory MVC
-    - API progression
-- REST / swagger
-  - day 2
-  - dep: none
-    - how to run without users?
-  - dev: in-memory API
-    - just CodeEvent resource
-    - no members or auth
-  - ops: basic VM
-- oauth / adb2c
-  - dep: keyvault
-    - complex, entire adb2c config
-  - dev:
-  - ops:
-- secrets management (isolated sample and explain other use cases)
-  - types
-    - local: user-secrets
-    - remote: keyvault
-  - dep: none
-  - dev: isolated example single endpoint API
-    - /db -> returns connection string secret
-      - with no secret: 404
-      - with secret: "connected to: <connection string>"
-    - returns value of a secret when requested
-      - local: from user-secrets
-      - remote: from keyvault
-  - ops:
-    - connection string API VM
-    - keyvault
-- backing service
-  - ef / mysql
-  - dep: keyvault
-    - simple, a connection string
-  - dev:
-  - ops:
-- roles
-  - dep: adb2c
-  - ops:
-  - dev: backed API
+- intro to hosting
+  - local (loopback), W/LAN, internet
+  - addressing (machine IPs, server process ports)
+  - connecting (URLs, domain IP resolution)
+- intro to azure
+  - high level (cloud computing, azure services used in the course)
+- intro to VMs
+  - high level (virtualization, provisioning on-demand, parity)
+
+### practical
+
+- dev: CodingEvents MVC app
+  - publishing and executing
+  - connecting (local, WAN, internet)
+  - how a project is published and executed outside of an IDE
+    - ? self-contained or runtime-dependent ?
+- ops: provision a VM and deploy the app
+  - register azure accounts
+  - how to provision and configure a publicly accessible VM
+  - how to use the VM RunCommand console
+
+## day 2: IaaS, web APIs & REST
+
+### conceptual
+
+- IaaS
+  - infrastructure (physical/virtual servers, networks, storage)
+  - on-site vs cloud (availability, expenses, management, security)
+  - scaling (horizontal, vertical)
+- web APIs
+  - review essentials (resources, JSON, endpoints)
+- REST
+  - review essentials (resource organization, methods, status codes)
+  - swagger (OpenAPI spec, importance of documentation)
+
+### practical
+
+- dev: explore a basic web API
+  - code
+    - single resource (CodingEvent) API
+    - SQLLite db
+  - dotnet core
+    - how an API is configured
+  - swagger
+    - how endpoints are documented
+    - how to navigate and use the swagger UI
+- ops: provision a VM and deploy the API
+  - register azure accounts
+  - how to provision and configure a publicly accessible VM
+  - how to use the VM RunCommand console
 
 # Setup
 
@@ -109,8 +75,6 @@
 - https://docs.microsoft.com/en-us/windows/wsl/install-win10
   - https://docs.microsoft.com/en-us/windows/wsl/initialize-distro
   - ubuntu 18.04
-
-TODO: lookup instructions guide / video for setup
 
 # Day 1 - Intro to Azure & VMs
 
