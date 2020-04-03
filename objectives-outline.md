@@ -19,15 +19,18 @@
 
 ### practical
 
-- dev: CodingEvents MVC app
+- dev: dotnet web API starter
   - publishing and executing
   - connecting (local, WAN, internet)
   - how a project is published and executed outside of an IDE
     - ? self-contained or runtime-dependent ?
-- ops: provision a VM and deploy the app
-  - register azure accounts
+- ops: provision a VM deploy the starter
+  - set up azure accounts
   - how to provision and configure a publicly accessible VM
   - how to use the VM RunCommand console
+    - configure dependencies
+    - run the API
+  - connect to a hosted project
 
 ## day 2: IaaS, web APIs & REST
 
@@ -54,10 +57,47 @@
   - swagger
     - how endpoints are documented
     - how to navigate and use the swagger UI
-- ops: provision a VM and deploy the API
-  - register azure accounts
-  - how to provision and configure a publicly accessible VM
-  - how to use the VM RunCommand console
+- ops: deploy the API to the VM
+  - use RunCommand
+    - remove starter API
+    - run CodingEvents API
+  - connect to hosted swagger UI
+
+## day 3: Secrets Management & Backing Services
+
+## conceptual
+
+- backing services
+  - external application dependency (db, logging, caching)
+- application environment configs
+  - parity and portability (dev, test, prod)
+  - external configuration (public, secret)
+  - version control
+    - committed (source, public config)
+    - ignored (derived, sensitive config)
+  - secrets management
+    - dotnet tooling
+      - local: user-secrets
+      - remote: keyvault
+
+## practical
+
+- dev: configuring API
+  - use MySQL
+  - configuring appsettings.json
+  - configuring Startup.cs for secrets access
+- ops: storing and managing secrets access
+  - local
+    - configuring dotnet user-secrets
+    - storing db credentials as a secret
+  - remote
+    - provisioning KeyVault
+    - configuring VM-KeyVault permissions
+    - storing db credentials
+  - deployment: update deployment with MySQL backed API
+    - use RunCommand
+      - install and configure MySQL backing service
+      - update and run latest API version
 
 # Setup
 
