@@ -4,6 +4,13 @@
 
 # overview
 
+## setup
+
+- linux subsystem (ubuntu 18.04 LTS)
+  - CLI
+    - dotnet
+    - azure
+
 ## day 1: intro to hosting, azure and VMs
 
 ### conceptual
@@ -65,7 +72,7 @@
 
 ## day 3: Secrets Management & Backing Services
 
-## conceptual
+### conceptual
 
 - backing services
   - external application dependency (db, logging, caching)
@@ -80,7 +87,7 @@
       - local: user-secrets
       - remote: keyvault
 
-## practical
+### practical
 
 - dev: configuring API
   - use MySQL
@@ -99,22 +106,58 @@
       - install and configure MySQL backing service
       - update and run latest API version
 
-# Setup
+## day 4: OAuth, OIDC, Azure ADB2C
 
-## programs
+### conceptual
 
-- CLI
-  - dotnet
-  - azure
-- GUI
-  - firefox
-  - postman
+- oauth
+  - fundamentals (authentication, authorization, delegation)
+  - oauth flows (security, use cases)
+  - JWT (transport medium, format, authenticity signatures)
+- oidc
+  - fundamentals (oauth extension spec, id tokens)
+  - implicit flow
+- Azure ADB2C
+  - fundamentals (tenant, providers, scopes, flows)
 
-## linux subsystem
+### practical
 
-- https://docs.microsoft.com/en-us/windows/wsl/install-win10
-  - https://docs.microsoft.com/en-us/windows/wsl/initialize-distro
-  - ubuntu 18.04
+- dev: explore ADB2C integration in the API
+  - configuring appsettings.json for ADB2C
+  - how to use the swagger UI to make authenticated requests
+- ops: ADB2C setup
+  - provision and configure ADB2C tenant directory
+    - connect ADB2C directory to primary subscription
+  - configure
+    - API application
+      - redirect URIs
+      - API access and published scopes
+    - local identity provider
+    - SUSI flow (provider and claims)
+  - deployment: update deployment with ADB2C API
+    - use RunCommand
+      - install and configure nginx RP and openSSL cert
+      - update and run latest API version
+      - connect to hosted swagger UI
+
+## day 5: authorization, next steps
+
+### conceptual
+
+- authorization
+  - roles (identity associations, endpoint access, attribute access)
+- next steps
+  - decoupling services (managed databases, subnets)
+  - load balancing
+  - security (firewalls, vulnerabilities)
+  - CI/CD (automation, code quality, testing)
+  - application environments (dev, test, staging, prod)
+  - monitoring (logging, notifications, automation)
+
+### practical
+
+- dev: exploring roles and authorization
+- ops: deploy final completed API
 
 # Day 1 - Intro to Azure & VMs
 
