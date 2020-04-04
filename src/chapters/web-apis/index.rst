@@ -8,3 +8,5 @@ Infrastructure As A Service, Web APIs, REST
    infrastructure
    api
    rest
+   walkthrough
+   studio
