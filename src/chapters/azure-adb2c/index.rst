@@ -8,3 +8,5 @@ OAuth, OIDC, & Azure ADB2C
    oauth
    oidc
    aadb2c
+   walkthrough
+   studio
