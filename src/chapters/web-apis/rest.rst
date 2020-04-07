@@ -66,3 +66,11 @@ As a final example let's say Fred Smith, and Roy move to another state and start
 
 Swagger
 =======
+
+We will be using Swagger as the front end to our RESTful API to illustrate what our API does. You will not be responsible for knowing Swagger at the end of this class, but it is a very useful tool.
+
+Swagger is a tool to assist in the documentation and creation of RESTful APIs across various tech stacks.
+
+After adding Swagger, and configuring it in a project it will generate HTML/CSS that will explain your RESTful API. It will show which resources exist, and the URLs, and HTTP Methods that can be used to interface with the RESTful API.
+
+.. TODO: Add a couple of images of what Swagger looks like
