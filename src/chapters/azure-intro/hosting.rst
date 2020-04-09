@@ -19,6 +19,8 @@ Microsoft provides us with a very powerful tool for preparing our projects for p
 
 Using the ``dotnet cli`` we can publish our projects into a folder, and then we can send that folder to any other computer we want. As long as that computer has the .NET SDK it can run our project.
 
+Today we are going to explore two ``dotnet cli`` commands: ``run`` and ``publish``.
+
 Run
 ---
 
