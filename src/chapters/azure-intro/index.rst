@@ -9,5 +9,4 @@ Introduction to Cloud Hosting, Azure, and VMs
    hosting
    azure
    virtual-machine
-   walkthrough
    studio
