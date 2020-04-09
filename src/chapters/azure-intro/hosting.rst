@@ -2,20 +2,22 @@
 Hosting
 =======
 
-After developing a project the natural question is how do you make your project available to a larger audience?
-
-How can your intended users interface with the code you created?
-
-This is where the idea of Hosting, or Deploying comes in. We will look at both of these ideas, and talk about bringing our .NET applications to the world.
+``Hosting`` is the act of deploy an application to a computer that is reachable by others. Throughout this class we have predominately hosted our applciations locally, the only person that could reach the application is the developer. We have been using Visual Studio to host our projects locally. Today we will learn about what is going on behind the scenes when we click the play button in Visual Studio.
 
 Local Hosting
 =============
 
-Before we deploy any applications to a remote server, or cloud environment let's discuss the steps for deploying an application to your local machine.
+Visual Studio was created to assist the developer, and one of the things it does for us is host our project locally with the click of a button. However, if you dig into what's happening behind the scenes we can start to learn about our first major concept in ``Operations``: building a project.
 
-Throughout this class you have predominately run your applications with your IDE Visual Studio. You simply click the green play button and your application springs to life. However our remote server will not have access to Visual Studio and will need to run our application in a different way.
+When you run your project Visual Studio is creating a version of your application that can be executed, and then running that excutable. This is all done behind the scenes so you can focus on development.
 
-Luckily for us Microsoft has created a way for us to run our applications without Visual Studio. Microsoft gives us a command line interface called ``dotnet`` that allows us to publish our .NET applications, so they can be run by another computer that has access to the ``dotnet`` runtime SDK.
+When we are ready to deploy our project our first step is to ``build`` our project.
+
+``Building`` a project means to package project files together so that they are executable by any machine that has the .NET SDK.
+
+Microsoft provides us with a very powerful tool for preparing our projects for publication: the ``dotnet cli``.
+
+Using the ``dotnet cli`` we can publish our projects into a folder, and then we can send that folder to any other computer we want. As long as that computer has the .NET SDK it can run our project.
 
 Run
 ---
