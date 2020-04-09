@@ -36,7 +36,7 @@ When we navigate to ``http://locahost:5000/`` we see:
 
 .. image:: /_static/images/azure-intro-hosting/dotnet-run-view.png
 
-Using ``dotnet run`` we have successfully run our .NET application, and it started our web app on the appropriate ports. This is essentially what Visual Studio is doing for us behind the scenes when we push the green play button.
+Using ``dotnet run`` we have successfully run our .NET application, and it started our web app on the appropriate port. This is essentially what Visual Studio is doing for us behind the scenes when we push the green play button.
 
 Publish
 -------
@@ -64,6 +64,20 @@ The steps to run a project on a server are:
     - transfer published artifacts to remote server
     - download dotnet runtime SDK on remote server
     - run artifacts using the dotnet runtime SDK
+
+.. comment -- a better way to publish that is easier for students, can really only use it if MS doesn't care what we show them, or is ok with this because I'm sure it goes against MS conventions for publishing .net core apps. The pro is this is much more clean to teach to students.
+
+   ``dotnet publish -c release -r linux-x64 -p:PublishSingleFile=true /path/to/project.csproj`` is a very handy tool that encapsulates a lot of unnecessary files from the students and ultimately will make it easier for them to understand the build artifacts and moving those build artifacts to a server.
+
+   However, I'm pretty sure it's not the MS convention to do it this way -- but could be a very useful tool for helping students connect build, move artifacts, deploy to server with runtime.
+
+   We will need to explain the flags:
+
+   - ``-c`` is short for ``--configuration`` which stands for the configuration to publish for, in this case release, the default is Debug. So the directory names inside of bin/ will be different.
+   - ``-r`` is short for ``--runtime`` which is the target runtime to pubish for. So which version of the runtime the project will run on os, and architecture. Even if you code on osx, or windows, you can set the runtime as ``linux-x64`` so that it will run on x-64 (most common servers) linux distros.
+   - ``-p`` I believe is short for ``--publish`` which allows us to access some internal configurations like if the project should be packaged together in one file, which is what we are doing in this case.
+
+   Thank Patrick for figuring this out, I can't imagine the github issues MS foxholes he had to climb through to find this information.
 
 Cloud Hosting
 =============
