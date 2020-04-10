@@ -237,10 +237,12 @@
   - viewing logs from az CLI
 - analysis
   - google search operators
-  - browser dev tools
-  - IDE debugging
-- reproducing
-  - prove isolation
+  - browser dev tools (network, console for CORS)
+  - IDE debugging (application)
+- reproducing (proving isolation)
+  - codebases
+    - API (familiar)
+    - lc101 app (foreign)
 - communicating
   - opening issues
 
@@ -289,4 +291,5 @@
   - application environments (dev, test, staging, prod)
   - monitoring (logging, notifications, automation)
   - docker containerization
+  - PKI
   - 12 factor apps (cloud-native devops)
