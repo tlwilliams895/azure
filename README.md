@@ -1,13 +1,65 @@
-# Introduction to Microsoft Azure
+# Week 1: Introduction to Ops With Microsoft Azure
 
-## day 1: intro to hosting, azure & VMs
+> goal: command line basics, REST API deployment and essential azure services through the web GUI
 
-### setup
+## day 1: intro to command line with bash and powershell
 
-- linux subsystem (ubuntu 18.04 LTS)
-  - CLI
-    - dotnet
-    - azure
+### conceptual
+
+> goal: understand the similarities and differences between GUI and CLI, fundamental aspects and uses of OS shells
+
+- shell basics
+  - GUI vs CLI 
+    - similarities: just a change in interface
+    - differences: superset of GUI access with higher access
+  - terminal emulator (high level: program for interfacing with the shell)
+  - scripting languages
+    - interacting with the OS
+    - REPL
+  - file system
+    - navigation and management
+    - PATH
+  - CLI tools
+- CLI tools
+  - command programs
+  - options (configuring commands)
+  - operators (combining / controlling commands)
+- scripting
+  - configuration of machines
+  - automating tasks
+
+- ? text editors ?
+  - VIM
+    - https://stackoverflow.com/questions/49414257/which-program-to-edit-a-file-in-powershell-and-just-the-powershell
+
+### practical
+
+> goals: navigate and manage the file system, install and manage programs, basic scripting
+
+- fundamentals
+  - file system
+    - working directory: view and change
+    - view and change: working directory
+    - files and dirs: create, read, delete, copy and move
+  - install CLI tools: dotnet, azure 
+- scripts
+  - create and use variables
+  - executing scripts
+
+- windows
+  - install powershell core
+  - fundamentals (see above)
+- linux
+  - setup linux subsystem (ubuntu 18.04 LTS)
+  - fundamentals (see above)
+
+- walkthrough (bash and powershell)
+  - show students how to write and execute a simple script
+- studio (bash and powershell)
+  - give use case and list of possible tools to use
+  - list requirements and have students piece together a solution script
+
+## day 2: intro to hosting, azure & VMs
 
 ### conceptual
 
@@ -35,7 +87,7 @@
     - run the API
   - connect to a hosted project
 
-## day 2: IaaS, web APIs & REST
+## day 3: IaaS, web APIs & REST
 
 ### conceptual
 
@@ -66,7 +118,7 @@
     - run CodingEvents API
   - connect to hosted swagger UI
 
-## day 3: secrets management & backing services
+## day 4: secrets management & backing services
 
 ### conceptual
 
@@ -102,7 +154,7 @@
       - install and configure MySQL backing service
       - update and run latest API version
 
-## day 4: OAuth, OIDC, azure ADB2C
+## day 5: OAuth, OIDC, azure ADB2C
 
 ### conceptual
 
@@ -115,12 +167,16 @@
   - implicit flow
 - Azure ADB2C
   - fundamentals (tenant, providers, scopes, flows)
+- authorization
+  - external (ops) vs embedded (dev) 
+  - RBAC vs ABAC
 
 ### practical
 
 - dev: explore ADB2C integration in the API
   - configuring appsettings.json for ADB2C
   - how to use the swagger UI to make authenticated requests
+  - exploring roles and authorization
 - ops: ADB2C setup
   - provision and configure ADB2C tenant directory
     - connect ADB2C directory to primary subscription
@@ -136,12 +192,95 @@
       - update and run latest API version
       - connect to hosted swagger UI
 
-## day 5: authorization, next steps
+# Week 2: Command Line Ops And Troubleshooting With Azure
+
+> goal: managing and automating Azure resources from the command line
+
+- changes: windows server and powershell
+
+## day 1:
+
+> goal: introductory azure management from CLI, 
+- configure az CLI
+- explore az CLI
+- access directory / services
+- deploy API (keyvault)
+  - using CLI
+  - scripting
+
+## day 2:
+
+> goal: scripting and complex service management with az CLI 
+- powershell scripting
+  - provision self-signed cert (openssl in powershell?)
+  - set up rp (nginx? in powershell)
+    - alt to nginx (kestrel IIS?)
+- az adbc2c config and API deployment
+
+## day 3: (dev) identifying, isolating, communicating and potential solutions
+
+> goal: gaining independence with application-level troubleshooting
+
+### conceptual
+- logging
+  - understanding exceptions and stack traces
+- root cause analysis (interpreting failure)
+  - 4XX/500 status codes
+  - narrowing the scope of your questions
+    - alternating question terms
+  - trusting sources
+- communicating
+  - phrasing and terminology
+  
+### practical
+- logging
+  - viewing logs from az CLI
+- analysis
+  - google search operators
+  - browser dev tools
+  - IDE debugging
+- reproducing
+  - prove isolation
+- communicating
+  - opening issues
+
+
+## day 4: (ops) identifying, isolating, communicating and potential solutions
+
+> goal: gaining independence with ops-level troubleshooting
 
 ### conceptual
 
-- authorization
-  - roles (identity associations, endpoint access, attribute access)
+- logging
+  - VPC and VM
+- root cause analysis (interpreting failure)
+  - connection timeout
+  - 5XX status codes
+  - VPC
+    - network security groups
+    - RP / load balancer / gateway
+  - VM
+    - application security groups
+    - firewalls
+- communicating
+  - phrasing and terminology
+  
+### practical
+- logging
+  - viewing logs from az CLI
+- analysis
+  - az CLI debugging
+- reproducing
+  - prove isolation
+- communicating
+  - opening issues
+
+## day 5: next steps
+
+> goal: exposure to other services and best practices
+
+### conceptual
+
 - next steps
   - decoupling services (managed databases, subnets)
   - load balancing
@@ -149,8 +288,5 @@
   - CI/CD (automation, code quality, testing)
   - application environments (dev, test, staging, prod)
   - monitoring (logging, notifications, automation)
-
-### practical
-
-- dev: exploring roles and authorization
-- ops: deploy final completed API
+  - docker containerization
+  - 12 factor apps (cloud-native devops)
