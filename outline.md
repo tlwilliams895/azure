@@ -171,6 +171,7 @@
 - authorization
   - external (ops) vs embedded (dev) 
   - RBAC vs ABAC
+- IAC (Infrastructure as Code)
 
 ### practical
 
@@ -261,6 +262,7 @@
 ### practical
 - logging
   - viewing logs from az CLI
+  - CRD logs to Blob Storage (using Powershell piping to analyze)
 - analysis
   - google search operators
   - browser dev tools (network, console for CORS)
