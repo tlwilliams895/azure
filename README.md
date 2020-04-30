@@ -41,29 +41,31 @@
 
 > **note**: deployments on windows server VM this week
 
-### day 1: introduction to azure CLI and powershell scripting
+### day 1: introduction to azure CLI and windows server deployment
 
-> **conceptual goals**: learn about the az CLI and how to write automated powershell scripts
+> **conceptual goals**: learn about the az CLI and manual deployment to IIS on a windows server VM
 
-> **practical goals**: how to configure and provision a windows server VM and keyvault with the az CLI, deploy the mysql backed API manually via CLI to windows server VM, develop an automating powershell script
+> **practical goals**: how to provision and configure a windows server VM and keyvault using the az CLI, install and configure IIS over RDP, deploy the ADB2C API version manually
 
-### day 2: introduction to windows service management, continued azure CLI and scripting
+### day 2: automated script deployments to linux and windows server
 
-> **conceptual goals**: introduction to configuration and use cases for windows services
+> **conceptual goals**: continued exposure to powershell and bash scripting to automate provisioning and configuration using the az CLI, introduction to SSH and SCP for interfacing with headless linux VMs, comparing and contrasting windows (powershell) and linux (bash) based automations
 
-> **practical goals**: how to configure and provision ADB2C with the az CLI, deploy final API as a windows service manually via CLI to windows server VM, develop an automating powershell script
+> **practical goals**: write automation scripts for provisioning and configuring windows server (powershell) and ubuntu (bash) VMs, using openssl to provision self-signed certs, use SSH and SCP to configure and deliver to the linux VM
 
-### day 3: (dev-side troubleshooting) identifying, isolating, communicating and potential solutions
+> **note**: windows server delivery with git over RDP, linux delivery via SSH and SCP
 
-> **conceptual goals**: gaining independence with application-level troubleshooting and root cause analysis
+### day 3: introduction to CI/CD with Azure DevOps Pipelines
 
-> **practical goals**: hands-on troubleshooting by accessing and analyzing logs, tracing 4XX/500 status codes, communicating and implementing solutions 
+> **conceptual goals**: learn the fundamentals of continuous integration, delivery, and deployment, introduction to Azure DevOps Pipelines, conceptual overview of pipeline stages and use cases
 
-### day 4: (ops-side troubleshooting) identifying, isolating, communicating and potential solutions
+> **practical goals**: understanding YML syntax and pipeline configuration directives, provision and configure two Azure DevOps Pipelines to automate build, publish, and deployment stages to a windows server VM and linux VM
 
-> **conceptual goals**: gaining independence with ops-level troubleshooting and root cause analysis from the VPC to the VM
+### day 4: (devops troubleshooting) identifying, isolating, communicating and potential solutions
 
-> **practical goals**: understanding timeouts and 5XX status codes, VPC-level issues, VM-level issues, communicating and implementing solutions
+> **conceptual goals**: gaining independence with application-level troubleshooting and root cause analysis. gaining independence with ops-level troubleshooting and root cause analysis from the VPC to the VM
+
+> **practical goals**: understanding timeouts and 5XX status codes, VPC-level issues, VM-level issues, communicating and implementing solutions. hands-on troubleshooting by accessing and analyzing logs, tracing 4XX/500 status codes, communicating and implementing solutions 
 
 ### day 5: next steps
 
