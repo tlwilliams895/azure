@@ -198,7 +198,7 @@
 
 > goal: managing and automating Azure resources from the command line, dev and ops troubleshooting, conceptual overview of out-of-scope ops topics
 
-- changes: windows server and powershell
+- changes: greater empahsis on windows server and powershell
 
 ## day 1:
 
@@ -208,76 +208,74 @@
 
 - exploring azure CLI (alternative to GUI portal)
 - combining powershell scripting with az CLI
+- RDP
+- IIS
 
 ### practical
 
 - configure az CLI
 - access directory and services
-- ops: deploy API (up to ADB2C from previous week)
+- ops: deploy API from previous week
   - manual
     - CLI provisioning
       - keyvault
       - VM
-    - CLI deployment of API
-      - deliver codebase and mysql configuration script
-      - execute configuration script  
+      - ADB2C
+    - RDP as entrypoint to remote server
+      - deliver codebase via git
+      - install and configure MySQL via powershell
+      - Configure IIS and it's dependencies
+        - Create a self-signed cert from IIS
   - scripting
-    - develop a script to automate these manual steps
+    - develop a powershell script to automate the manual CLI steps
 
 ## day 2:
 
-> goal: continued powershell scripting and service management with az CLI
+> goal: continued powershell scripting and service management with az CLI, introduction to az CLI for Linux Servers
 
 ### practical
 
-- ops: deploy API (final API with ADB2C)
+- ops: deploy API to both Windows Server, and Ubuntu
   - manual
     - CLI provisioning
-      - ADB2C tenant and subscription linking
+      - KeyVault
+      - VM
+      - ADB2C
     - CLI deployment of API
-      - deliver codebase and configuration script
-      - execute configuration script  
-    - 
+      - RDP for Windows Server via powershell
+      - SSH & SCP for Ubuntu via bash
   - scripting
-  - provision self-signed cert (openssl in powershell?)
-  - set up rp (nginx? in powershell)
-    - alt to nginx (kestrel IIS?)
-- az adbc2c config and API deployment
+    - Powershell
+    - Bash
+  - set up nginx in Ubuntu
 
-## day 3: (dev) identifying, isolating, communicating and potential solutions
+## day 3: Introduction to CI/CD with Azure Pipeline
 
-> goal: gaining independence with application-level troubleshooting
+> goal: understand basic steps of CI/CD and basic Azure Pipeline tasks
 
 ### conceptual
-- logging
-  - understanding exceptions and stack traces
-- root cause analysis (interpreting failure)
-  - 4XX/500 status codes
-  - narrowing the scope of your questions
-    - alternating question terms
-  - trusting sources
-- communicating
-  - phrasing and terminology
+- CI/CD basics & Pipeline Tasks
+  - VCS connection
+  - Build
+  - Deliver
+  - Deploy(?)
   
 ### practical
-- logging
-  - viewing logs from az CLI
-  - CRD logs to Blob Storage (using Powershell piping to analyze)
-- analysis
-  - google search operators
-  - browser dev tools (network, console for CORS)
-  - IDE debugging (application)
-- reproducing (proving isolation)
-  - codebases
-    - API (familiar)
-    - lc101 app (foreign)
-- communicating
-  - opening issues
+- Azure Pipeline
+  - Windows Server
+    - VCS connection
+    - Build
+    - Deliver
+    - Deploy
+  - Ubuntu
+    - VCS connection
+    - Build
+    - Deliver
+    - Deploy(?)
 
+## day 4: (devops) identifying, isolating, communicating and potential solutions
 
-## day 4: (ops) identifying, isolating, communicating and potential solutions
-
-> goal: gaining independence with ops-level troubleshooting
+> goal: gaining independence with devops troubleshooting
 
 ### conceptual
 
@@ -294,7 +292,16 @@
     - firewalls
 - communicating
   - phrasing and terminology
-  
+- logging
+  - understanding exceptions and stack traces
+- root cause analysis (interpreting failure)
+  - 4XX/500 status codes
+  - narrowing the scope of your questions
+    - alternating question terms
+  - trusting sources
+- communicating
+  - phrasing and terminology
+
 ### practical
 - logging
   - viewing logs from az CLI
@@ -302,6 +309,19 @@
   - az CLI debugging
 - reproducing
   - prove isolation
+- communicating
+  - opening issues
+- logging
+  - viewing logs from az CLI
+  - CRD logs to Blob Storage (using Powershell piping to analyze)
+- analysis
+  - google search operators
+  - browser dev tools (network, console for CORS)
+  - IDE debugging (application)
+- reproducing (proving isolation)
+  - codebases
+    - API (familiar)
+    - lc101 app (foreign)
 - communicating
   - opening issues
 
