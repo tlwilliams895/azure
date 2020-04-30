@@ -41,23 +41,25 @@
 
 > **note**: deployments on windows server VM this week
 
-### day 1: introduction to azure CLI and powershell scripting
+### day 1: introduction to azure CLI and windows server deployment
 
-> **conceptual goals**: learn about the az CLI and how to write automated powershell scripts and introduction to configurationa nd use cases for window services
+> **conceptual goals**: learn about the az CLI and manual deployment to IIS on a windows server VM
 
-> **practical goals**: how to configure and provision a windows server VM and keyvault with the az CLI, deploy the mysql backed API manually via CLI to windows server VM, develop an automating powershell script, how to configure and provision ADB2C with the az CLI
+> **practical goals**: how to provision and configure a windows server VM and keyvault using the az CLI, install and configure IIS over RDP, deploy the ADB2C API version manually
 
-### day 2: Deploying Final Project to Windows Server, and Ubuntu Server via automated scripts using az CLI from both powershell and bash
+### day 2: automated script deployments to linux and windows server
 
-> **conceptual goals**: continued exposure to powershell and bash scripting, continued exposure to the az CLI, introduction to SSH and SCP
+> **conceptual goals**: continued exposure to powershell and bash scripting to automate provisioning and configuration using the az CLI, introduction to SSH and SCP for interfacing with headless linux VMs, comparing and contrasting windows (powershell) and linux (bash) based automations
 
-> **practical goals**: continued practice provisioning and configuring Azure services (VM, KeyVault, ADB2C) via az CLI. contined practice of interfacing with Windows Server via RDP. Introduction of interfacing with Linux Servers via SSH, and SCP.
+> **practical goals**: write automation scripts for provisioning and configuring windows server (powershell) and ubuntu (bash) VMs, using openssl to provision self-signed certs, use SSH and SCP to configure and deliver to the linux VM
 
-### day 3: Introduction to CI/CD with Azure Pipeline
+> **note**: windows server delivery with git over RDP, linux delivery via SSH and SCP
 
-> **conceptual goals**: Understand basic discrete steps of CI/CD, basic knowledge around Azure Pipeline, and ability to read various pipeline tasks
+### day 3: introduction to CI/CD with Azure DevOps Pipelines
 
-> **practical goals**: create, and configure an Azure Pipeline to automate various tasks of their Windows Server API deployment and to automate tasks of their Linux Server API deployment
+> **conceptual goals**: learn the fundamentals of continuous integration, delivery, and deployment, introduction to Azure DevOps Pipelines, conceptual overview of pipeline stages and use cases
+
+> **practical goals**: understanding YML syntax and pipeline configuration directives, provision and configure two Azure DevOps Pipelines to automate build, publish, and deployment stages to a windows server VM and linux VM
 
 ### day 4: (devops troubleshooting) identifying, isolating, communicating and potential solutions
 
