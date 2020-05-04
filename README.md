@@ -23,7 +23,7 @@
 
 > **practical goals**: explore dotnet web API structure and deploy a basic sqlite backed API to azure linux VM through the Azure Portal
 
-### day 4: secrets management & backing services
+### day 4: environment configurations & backing services
 
 > **conceptual goals**: learn about backing services, methods of external configurations and secrets management 
 

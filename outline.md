@@ -180,41 +180,72 @@
 - clone (delivery), publish, and execute the sqlite API version (`branch: 1-sqlite`)
 - connect to the hosted project by its public IP
 
-## day 4: secrets management & backing services
+## day 4: environment configurations & backing services
 
 ### conceptual
 
 - backing services
-  - external application dependency (db, logging, caching)
+  - external application dependency
+    - examples: db, logging, caching
 - application environment configs
-  - parity and portability (dev, test, prod)
-  - external configuration (public, secret)
-  - version control
-    - committed (source, public config)
-    - ignored (derived, sensitive config)
-  - secrets management
-    - dotnet tooling
-      - local: user-secrets
-      - remote: keyvault
+  - parity and portability across environments (dev, test, staging, prod)
+- version control
+  - committed (source, public config)
+  - ignored (derived, sensitive config)
+- external configuration (public, secret)
+  - public
+    - appconfig, environment variables
+  - secret (secrets managers)
+    - local: dotnet user-secrets
+    - remote: keyvault
 
 ### practical
 
-- dev: configuring API
-  - use MySQL
+- configuring API to use MySQL
   - configuring appsettings.json
   - configuring Startup.cs for secrets access
-- ops: storing and managing secrets access
-  - local
+- local 
+  - storing and managing secrets access
     - configuring dotnet user-secrets
-    - storing db credentials as a secret
-  - remote
-    - provisioning KeyVault
-    - configuring VM-KeyVault permissions
-    - storing db credentials
-  - deployment: update deployment with MySQL backed API
+    - storing db connection string secret
+- remote
+  - provisioning KeyVault
+  - configuring VM-KeyVault permissions
+  - storing db connection string secret
+  - update VM deploymeny
     - use azure cloudshell
-      - install and configure MySQL backing service
-      - update and run latest API version
+    - install and configure MySQL backing service
+    - run MySQL version of API
+
+### walkthrough: Secrets App
+
+> **note**: using the azure portal and VM Run Command console
+
+- basic API for storing and exposing a secrets echo endpoint
+- provisioning and configuring use of a secrets manager
+  - local: setup dotnet user-secrets
+  - remote: setup azure keyvault
+    - provision keyvault
+    - add mysql connection string secret
+    - grant VM identity and keyvault access
+- running app locally and in a VM to show succesful secrets access
+
+### studio: Deploy MySQL Backed API
+
+> **note**: using the azure portal and VM Run Command console
+
+- destroy previous VM (keep RG get rid of VM)
+- provision and configure a new ubuntu linux VM
+  - extend previous VM configuration to include docker for the embedded db
+- provision and configure keyvault for the API
+  - store MySQL connection string secret
+  - add VM identity
+  - grant VM access to keyvault
+- clone, publish, execute MySQL backed API version (`branch: 2-mysql-solution`)
+- connect to the hosted project by its public IP
+- show need for linux system services
+  - manually vs automatically starting the API on linux VM startup
+  - describe and provide unit file and sysctl commands for running the API as a system service
 
 ## day 5: OAuth, OIDC, azure ADB2C
 
