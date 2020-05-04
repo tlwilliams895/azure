@@ -287,6 +287,10 @@
     - update and run latest API version
     - connect to hosted swagger UI
 
+### studio: Visual Oauth
+
+- (https://github.com/launchcodeeducation/visual-oauth)[Visual Oauth]
+
 ### walkthrough: Setup ADB2C
 
 - setup ADB2C directory
