@@ -93,9 +93,10 @@
 
 ### conceptual
 
-- intro to hosting
+- intro to networking
   - local (loopback), W/LAN, internet
   - addressing (machine IPs, server process ports)
+- intro to hosting
   - connecting (URLs, domain IP resolution)
 - intro to azure
   - high level (cloud computing, azure services used in the course)
@@ -104,18 +105,33 @@
 
 ### practical
 
-- dev: dotnet web API starter
-  - publishing and executing
-  - connecting (local, WAN, internet)
-  - how a project is published and executed outside of an IDE
-    - ? self-contained or runtime-dependent ?
-- ops: provision a VM deploy the starter
-  - set up azure accounts and MFA
-  - how to provision and configure a publicly accessible VM
-  - how to use the use azure cloud shell
-    - configure dependencies
-    - run the API
-  - connect to a hosted project
+- publishing and executing
+- connecting (local, WAN, internet)
+- how a project is published and executed outside of an IDE
+- set up azure accounts
+- how to provision and configure a publicly accessible Linux VM
+- how to use the Azure VM Run Command console
+  - configure dependencies
+  - run the API
+- connect to a hosted project
+
+### Walkthrough
+
+- git clone, setup API project and branch system 
+- publish, execute, connect (locally)
+
+### Studio: Running Code Anywhere [in person]
+
+- simulating remote machine hosting on a local network
+- role playing dev machine and remote hosting machine
+- publish, execute, connect (locally) for windows and linux
+- instructor-led connecting over LAN to private IP of hosted machine
+
+### Studio: Running Code Anywhere [remote]
+
+- publish, execute, connect (locally) for windows and linux
+- simulate remote machine hosting on a local network
+- connecting to the host machine by private IP from another device (phone, other computer on network)
 
 ## day 3: IaaS, web APIs & REST
 
