@@ -105,17 +105,17 @@
 
 ### practical
 
-- publishing and executing
-- connecting (local, WAN, internet)
-- how a project is published and executed outside of an IDE
 - set up azure accounts
-- how to provision and configure a publicly accessible Linux VM
-- how to use the Azure VM Run Command console
-  - configure dependencies
-  - run the API
-- connect to a hosted project
+- explore azure web portal and available services
+- publishing and executing a dotnet core project outside of an IDE
+- connecting to a hosted server (local, W/LAN, internet)
 
-### Walkthrough
+### Walkthrough: Setup & Explore Azure
+
+- set up azure accounts and subscriptions
+- get familiar with the web portal and available services
+
+### Walkthrough: Running Code From The Command Line
 
 - git clone, setup API project and branch system 
 - publish, execute, connect (locally)
@@ -148,20 +148,37 @@
   - swagger (OpenAPI spec, importance of documentation)
 
 ### practical
+- dotnet core
+  - how an API is configured
+- swagger
+  - how endpoints are documented
+  - how to navigate and use the swagger UI
+- using the azure web portal
+  - provision and configure a publicly accessible Linux VM
+  - use the VM Run Command console
+    - configure dependencies
+    - clone and publish the 1-sqlite API version
+    - run the API
+- connect to a hosted project by its public IP
 
-- dev: explore a basic web API
-  - code
-    - single resource (CodingEvent) API
-    - SQLLite db
-  - dotnet core
-    - how an API is configured
-  - swagger
-    - how endpoints are documented
-    - how to navigate and use the swagger UI
-- ops: deploy the API to the VM
-  - use azure cloud shell
-    - build and run CodingEvents API
-  - connect to hosted swagger UI
+### walkthrough
+> **note**: using the azure portal and VM Run Command console 
+
+- provisioning a resource group and ubuntu VM
+- setup dependencies using the `apt` package manager (dotnet SDK)
+- create, publish, and execute a dotnet webapi (default project)
+- configuring the NSG for public access
+- connect to the hosted project by its public IP
+- tearing down resource groups
+
+### studio
+> **note**: using the azure portal and VM Run Command console
+
+- provision resource group and ubuntu VM
+- setup dependencies using the `apt` package manager (+git)
+- configuring the NSG for public access
+- clone (delivery), publish, and execute the sqlite API version (`branch: 1-sqlite`)
+- connect to the hosted project by its public IP
 
 ## day 4: secrets management & backing services
 
