@@ -33,7 +33,7 @@
 
 > **conceptual goals**: learn about OAuth, OIDC, JWTs and azure ADB2C service
 
-> **practical goals**: setup ADB2C tenant, deploy ADB2C API version with nginx reverse proxy for self-signed TLS termination through the Azure Portal
+> **practical goals**: explore OAuth, setup ADB2C tenant, deploy ADB2C API version with nginx reverse proxy for self-signed TLS termination through the Azure Portal
 
 # Week 2: Command Line Ops And DevOps Troubleshooting With Azure
 

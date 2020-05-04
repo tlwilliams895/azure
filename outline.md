@@ -251,10 +251,14 @@
 
 ### conceptual
 
+- JWT
+  - a verifiable transport medium
+  - format (header, signature, payload)
+  - authenticity signatures
+  - decoding JWT (jwt.io, jwt.ms)
 - oauth
   - fundamentals (authentication, authorization, delegation)
   - oauth flows (security, use cases)
-  - JWT (transport medium, format, authenticity signatures)
 - oidc
   - fundamentals (oauth extension spec, id tokens)
   - implicit flow
@@ -263,28 +267,46 @@
 - authorization
   - external (ops) vs embedded (dev) 
   - RBAC vs ABAC
-- IAC (Infrastructure as Code)
 
 ### practical
 
-- dev: explore ADB2C integration in the API
+- API ADB2C integration
   - configuring appsettings.json for ADB2C
   - how to use the swagger UI to make authenticated requests
-  - exploring roles and authorization
-- ops: ADB2C setup
+  - exploring embedded roles and authorization
+- ADB2C setup
   - provision and configure ADB2C tenant directory
     - connect ADB2C directory to primary subscription
-  - configure
-    - API application
-      - redirect URIs
-      - API access and published scopes
+  - configure API application
+    - redirect URIs
+    - API access and published scopes
     - local identity provider
     - SUSI flow (provider and claims)
-  - deployment: update deployment with ADB2C API
-    - use azure cloud shell
-      - install and configure nginx RP and openSSL cert
-      - update and run latest API version
-      - connect to hosted swagger UI
+- update deployment with ADB2C API
+    - install and configure nginx RP and openSSL self-signed cert
+    - update and run latest API version
+    - connect to hosted swagger UI
+
+### walkthrough: Setup ADB2C
+
+- setup ADB2C directory
+- link to main subscription
+- configure API application
+    - redirect URIs
+    - API access and published scopes
+    - local identity provider
+    - SUSI flow (provider and claims)
+- test SUSI flow using jwt.ms reply URL
+
+### studio: Deploy ADB2C Integrated API
+
+- configure appsettings.json for ADB2C tenant (commit and push)
+- update existing VM
+  - stop API service
+  - run script for configuring nginx reverse-proxy and cutting a self-signed cert
+  - replace with final API version (`branch: 4-member-roles`)
+  - restart API service
+- connect and explore the final API
 
 # Week 2: Command Line Ops And Troubleshooting With Azure
 
@@ -433,3 +455,4 @@
   - docker containerization
   - PKI
   - 12 factor apps (cloud-native devops)
+  - IAC (Infrastructure as Code)
