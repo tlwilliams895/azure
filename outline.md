@@ -10,6 +10,17 @@
 
 > goal: understand the similarities and differences between GUI and CLI, fundamental aspects and uses of OS shells
 
+- Fundamental OS Differences (High Level as it relates to this class)
+  - Unix
+    - Headless / CLI Preference
+    - String based
+  - Windows
+    - GUI Preference
+    - Object Oriented based
+  - Cross platform tooling
+    - Azure CLI
+    - Dotnet CLI
+    - Git
 - shell basics
   - GUI vs CLI 
     - similarities: just a change in interface
@@ -20,23 +31,32 @@
     - REPL
   - file system
     - navigation and management
-    - PATH
-  - CLI tools
+- Package Managers
+  - Installation and Configuration
+  - Usage for basic 3rd party package installation
+  - Linux: apt
+  - Windows: choco
+  - PATH  
 - CLI tools
   - command programs
   - options (configuring commands)
-  - operators (combining / controlling commands)
+- Piping (combining / controlling commands)
+  - passing STDOUT to STDIN between commands
+  - BASH: Grep
+  - Powershell: Converting strings to objects, filtering, sorting
 - scripting
   - configuration of machines
   - automating tasks
-
-- ? text editors ?
-  - VIM
-    - https://stackoverflow.com/questions/49414257/which-program-to-edit-a-file-in-powershell-and-just-the-powershell
+  - All 5 programming fundamentals are availble for use (vars, conditionals, loops, functions, data structures)
+- remote file editing
+  - VIM (high level basic commands)
+  - Notepad
 
 ### practical
 
 > goals: navigate and manage the file system, install and manage programs, basic scripting
+
+> note: reference guides combined, and individual ref guides w/ isolated atomic exercises at bottom
 
 - fundamentals
   - file system
@@ -47,19 +67,27 @@
 - scripts
   - create and use variables
   - executing scripts
-
+  - inline evaluation
 - windows
   - install powershell core
-  - fundamentals (see above)
+  - fundamentals and scripts (see above)
+  - piping: object conversion, filtering, sorting
 - linux
   - setup linux subsystem (ubuntu 18.04 LTS)
-  - fundamentals (see above)
+  - fundamentals and scripts (see above)
+  - piping: filtering via grep
 
-- walkthrough (bash and powershell)
-  - show students how to write and execute a simple script
-- studio (bash and powershell)
-  - give use case and list of possible tools to use
-  - list requirements and have students piece together a solution script
+### Walkthrough
+
+- configuring machines
+  - install dotnet cli, az cli, and git
+- compose multiple commands
+- executing scripts
+- inline evaulation
+
+### Studio
+
+> developer note: lookup external exercises, and take note of scripting uses throughout the course and mock those here as their final exercises on day 1
 
 ## day 2: intro to hosting, azure & VMs
 
