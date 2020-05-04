@@ -8,32 +8,32 @@
 
 ### day 1: intro to command line with bash and powershell
 
-> **conceptual goals**: understand the similarities and differences between GUI and CLI, fundamental aspects and uses of OS shells
+> **conceptual goals**: understand the similarities and differences between GUI and CLI, fundamental aspects and uses of OS shells, understanding piping
 
-> **practical goals**: (bash and powershell) navigate and manage the file system, install and manage programs, basic scripting
+> **practical goals**: (bash and powershell) navigate and manage the file system, install and manage programs, basic scripting, ability to pipe STDOUT to additional shell commands
 
 ### day 2: intro to hosting, azure & VMs
 
 > **conceptual goals**: introduction to hosting, basic networking, azure and VMs
 
-> **practical goals**: practicing publishing, executing and connecting to remote (W/LAN) machines
+> **practical goals**: practicing publishing, executing and connecting to remote (W/LAN) machines, set up their Azure accounts and explore the Azure Portal
 
 ### day 3: IaaS, web APIs & REST
 > **conceptual goals**: understand purpose and differences between IaaS and on-prem, review web APIs, REST and swagger 
 
-> **practical goals**: explore dotnet web API structure and deploy a basic sqlite backed API to azure linux VM 
+> **practical goals**: explore dotnet web API structure and deploy a basic sqlite backed API to azure linux VM through the Azure Portal
 
 ### day 4: secrets management & backing services
 
-> **conceptual goals**: learn about backing services, external configurations and secrets management 
+> **conceptual goals**: learn about backing services, methods of external configurations and secrets management 
 
-> **practical goals**: learn how to use local user-secrets and remote keyvault, deploy an API backed by an embedded mysql container to an azure linux VM
+> **practical goals**: learn how to use local user-secrets and remote keyvault and deploy an API backed by an embedded mysql container to an azure linux VM through the Azure Portal
 
 ### day 5: OAuth, OIDC, azure ADB2C
 
 > **conceptual goals**: learn about OAuth, OIDC, JWTs and azure ADB2C service
 
-> **practical goals**: setup ADB2C tenant, deploy ADB2C API version with nginx reverse proxy for self-signed TLS termination
+> **practical goals**: setup ADB2C tenant, deploy ADB2C API version with nginx reverse proxy for self-signed TLS termination through the Azure Portal
 
 # Week 2: Command Line Ops And DevOps Troubleshooting With Azure
 
