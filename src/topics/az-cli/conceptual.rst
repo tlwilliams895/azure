@@ -107,15 +107,18 @@ The CLI is broken down into 3 main areas:
 #. **Sub-Groups**: services or related features of a top-level **Group**
 #. **Commands**: commands for managing a **Group** or **Sub-Group**
 
-The general form of any command you enter will look like this. Recall that ``<>`` means a required argument and ``[]`` means an optional one:
+The general form of any command you enter will look like this:
 
 .. sourcecode:: bash
 
+    # <required argument>
+    # [optional argument] 
     $ az <group> [sub-group] <command> [command options]
 
 That's a bit abstract but let's look at it using the example we saw earlier:
 
 .. sourcecode:: bash
+
     # Group: vm
     # Sub-Group: none
     # Command: create
@@ -134,7 +137,7 @@ Groups are the main resources and services that Azure CLI exposes control over. 
 
     For the purpose of explaining the organizational pattern we use the terms **Group**, **Sub-Group** and **Commands** to mirror the terminology used in the CLI and its official documentation. In practice when we refer to ``az group`` we will always mean **resource group**.
 
-You can see all of the Groups available in the ``az CLI`` by entering the following ``help`` command (more on that later):
+You can see all of the Groups available in the ``az CLI`` by entering the following ``help`` command (more on that later). Try entering this command in your terminal:
 
 .. sourcecode:: bash
 
@@ -151,6 +154,8 @@ You can use the ``help`` command on a specific Group to view the Sub-Groups rela
     :caption: general form
 
     $ az <group> --help
+
+Try entering the following commands to see the Sub-Groups related to the ``vm`` and ``keyvault`` Groups:
 
 .. sourcecode:: bash
     :caption: vm and keyvault examples
