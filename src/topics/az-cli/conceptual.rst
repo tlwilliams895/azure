@@ -6,16 +6,18 @@
 Introduction to the Azure CLI
 =============================
 
-Up to this point we have been using the Azure Web Portal to provision and manage our Azure resources. Using the terminology we have learned we would call this a graphical user interface, or GUI. GUIs are convenient and intuitive to use but inherently fall behind the capabilities of their text-based counterpart -- the ``az CLI``.
+Up to this point we have been using the Azure Web Portal to provision and manage our Azure resources. Using the terminology we have learned we would call this a graphical user interface, or GUI. GUIs are convenient and intuitive to use but inherently fall behind the capabilities of their text-based counterpart -- the CLI.
 
 Why Should We Use the CLI?
 ==========================
 
-The Azure Web Portal, with its intuitive layout and interactive menus, is actually just the "skin" interface that is backed by a comprehensive "brain" of a REST API. Any actions you take on the web portal to manage your Azure resources are ultimately fulfilled by HTTP requests sent `to this REST API<https://docs.microsoft.com/en-us/rest/api/azure/>`_. Can you think why they would develop a REST API that is distinct from the online GUI?
+The Azure Web Portal, with its intuitive layout and interactive menus, is actually just the "skin" interface that is backed by a comprehensive "brain" of a REST API. Any actions you take on the web portal to manage your Azure resources are ultimately fulfilled by HTTP requests sent `to this REST API <https://docs.microsoft.com/en-us/rest/api/azure/>`_. Can you think why they would develop a REST API that is distinct from the online GUI?
 
 Recall that one of the many benefits of having a standalone API is that it operates **independent of any user interface(s) that consume it**. By separating their data management [API] from their presentation [UI] they are able to support flexibility and **multiple user interfaces** against a single consistent service. In the case of Azure that single REST API supports both the GUI web portal *and* the ``az CLI``.
 
-At this point you understand the design decision of decoupling their API from their UIs, but the question still remains -- why should we bother using a CLI? While GUIs are great to look at, and arguably offer a more intuitive experience *to a human*, they fall short in two main areas -- access and automation.
+.. todo:: diagram showing Azure -> REST API ->/-> Web Portal / CLI
+
+At this point you understand the design decision of decoupling their API from their UIs, but the question still remains -- why should we bother using a CLI? Text-based interfaces are so *dated* aren't they? While GUIs are great to look at, and arguably offer a more intuitive experience *to a human*, they fall short in two main areas -- access and automation.
 
 The GUI Delay
 -------------
@@ -42,7 +44,7 @@ There are two key takeaways here about a system, of which Azure is but one examp
 - **the CLI will always receive the latest additions and updates before the GUI**
 - **the CLI will always have more granular management capabilities than its GUI counterpart**
 
-Ultimately what matters to you is selecting the interface that enables you to be more productive with your time.
+While the purpose of this lesson is to inspire your understanding and appreciation for CLIs they *are not always the best choice*. Sometimes GUIs offer an abstraction over more tedious work. Like most things in the development world you should not blindly adhere to a single approach. What is most important is selecting the tool that enables you to be more productive with your time. 
 
 Work Velocity
 -------------
@@ -66,7 +68,7 @@ Using the CLI you would need to open your terminal and enter a single command:
 
     $ az vm create <configuration option(s)>
 
-Keep in mind that at first using the CLI will seem foreign to you. However, we will soon see that the Azure CLI has an intuitive pattern to how it is organized and used. The biggest strength that the CLI has over the GUI is its automation potential. 
+This example highlights the conciseness with regard to *manual* steps. But the real power of CLI tools comes in their automation capabilities.
 
 Automation Showdown
 -------------------
@@ -75,9 +77,9 @@ While the CLI is faster to work with we only looked through the lens of manually
 
 .. tip::
 
-    Computers excel at performing tasks exactly the same way every time. Whatever they are commanded to do they will do without fail. Humans on the other hand are prone to introducing errors. For complex and large scale systems the less human interaction involved the less errors can occur. For this reason automation is a core tenant of modern development.
+    Computers excel at performing tasks exactly the same way every time. Whatever they are commanded to do they will do without fail or fatigue. Humans on the other hand are prone to introducing errors. For large complex systems the less human interaction involved the less errors can occur. For this reason automation is a core tenant of modern development.
 
-Let's revisit the example from earlier. But this time consider the task of provisioning 1000 VMs. Any human-based solution would require repeating steps 4-6 from above 1000 times. You can imagine that at some point the human would grow tired and as a result make a mistake in one or more of the configuration options. You could wish for humans to have a "loop" ability or you could turn to the CLI!
+Let's revisit the example from earlier. But this time consider the task of provisioning 1000 VMs. Any human-based solution would require repeating steps 4-6 from above 1000 times. You can imagine that at some point the human would grow tired and as a result make a mistake in one or more of the configuration options. While humans don't have a "loop" ability our scripting languages certainly do. Here is a basic example in PowerShell invoking the ``az CLI``:
 
 .. sourcecode:: powershell
     :caption: powershell example
@@ -94,8 +96,72 @@ This is just one of thousands of automation examples you will come across in you
 Azure CLI Fundamentals
 ======================
 
+The Azure CLI has been developed as an `open source <https://github.com/Azure/azure-cli>`_ cross-platform tool. Like the ``dotnet CLI`` it works the same whether you are executing it on Windows, Linux, or OSX through either of the supported shells, ``bash`` or ``PowerShell``. While it does not have the graphical help menus of the web GUI it does have a well organized pattern that makes "headless" navigation more intuitive than you may expect.
+
 The Pattern
 -----------
+
+The CLI is broken down into 3 main areas:
+
+#. **Groups**: top-level services and resources
+#. **Sub-Groups**: services or related features of a top-level **Group**
+#. **Commands**: commands for managing a **Group** or **Sub-Group**
+
+The general form of any command you enter will look like this. Recall that ``<>`` means a required argument and ``[]`` means an optional one:
+
+.. sourcecode:: bash
+
+    $ az <group> [sub-group] <command> [command options]
+
+That's a bit abstract but let's look at it using the example we saw earlier:
+
+.. sourcecode:: bash
+    # Group: vm
+    # Sub-Group: none
+    # Command: create
+    $ az vm create <configuration options>
+
+Groups
+^^^^^^
+
+Groups are the main resources and services that Azure CLI exposes control over. Some examples, used in this course, include:
+
+#. ``vm``: Virtual Machine management
+#. ``keyvault``: KeyVault management
+#. ``group``: Resource Group management
+
+.. note:: 
+
+    For the purpose of explaining the organizational pattern we use the terms **Group**, **Sub-Group** and **Commands** to mirror the terminology used in the CLI and its official documentation. In practice when we refer to ``az group`` we will always mean **resource group**.
+
+You can see all of the Groups available in the ``az CLI`` by entering the following ``help`` command (more on that later):
+
+.. sourcecode:: bash
+
+    $ az --help
+
+Sub-Groups
+^^^^^^^^^^
+
+Within each of these Groups will be Sub-Groups that relate to them. For example under the Group ``vm`` you would find the related Sub-Group ``identity`` which refers to the VM identity configuration. Similarly under ``keyvault`` you would find the Sub-Group ``secret`` for managing KeyVault secrets.
+
+You can use the ``help`` command on a specific Group to view the Sub-Groups related to it:
+
+.. sourcecode:: bash
+    :caption: general form
+
+    $ az <group> --help
+
+.. sourcecode:: bash
+    :caption: vm and keyvault examples
+
+    $ az vm --help
+    $ az keyvault --help
+
+Commands
+^^^^^^^^
+
+Commands are declaratively named actions that you can take on 
 
 Getting Help
 ------------
