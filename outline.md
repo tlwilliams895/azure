@@ -1,5 +1,3 @@
-
-
 # Week 1: Introduction to Ops With Microsoft Azure
 
 > goal: command line basics, REST API deployment and essential azure services through the web GUI
@@ -22,7 +20,7 @@
     - Dotnet CLI
     - Git
 - shell basics
-  - GUI vs CLI 
+  - GUI vs CLI
     - similarities: just a change in interface
     - differences: superset of GUI access with higher access
   - terminal emulator (high level: program for interfacing with the shell)
@@ -36,7 +34,7 @@
   - Usage for basic 3rd party package installation
   - Linux: apt
   - Windows: choco
-  - PATH  
+  - PATH
 - CLI tools
   - command programs
   - options (configuring commands)
@@ -63,7 +61,7 @@
     - working directory: view and change
     - view and change: working directory
     - files and dirs: create, read, delete, copy and move
-  - install CLI tools: dotnet, azure 
+  - install CLI tools: dotnet, azure
 - scripts
   - create and use variables
   - executing scripts
@@ -117,7 +115,7 @@
 
 ### Walkthrough: Running Code From The Command Line
 
-- git clone, setup API project and branch system 
+- git clone, setup API project and branch system
 - publish, execute, connect (locally)
 
 ### Studio: Running Code Anywhere [in person]
@@ -148,6 +146,7 @@
   - swagger (OpenAPI spec, importance of documentation)
 
 ### practical
+
 - dotnet core
   - how an API is configured
 - swagger
@@ -162,7 +161,8 @@
 - connect to a hosted project by its public IP
 
 ### walkthrough
-> **note**: using the azure portal and VM Run Command console 
+
+> **note**: using the azure portal and VM Run Command console
 
 - provisioning a resource group and ubuntu VM
 - setup dependencies using the `apt` package manager (dotnet SDK)
@@ -172,6 +172,7 @@
 - tearing down resource groups
 
 ### studio
+
 > **note**: using the azure portal and VM Run Command console
 
 - provision resource group and ubuntu VM
@@ -204,7 +205,7 @@
 - configuring API to use MySQL
   - configuring appsettings.json
   - configuring Startup.cs for secrets access
-- local 
+- local
   - storing and managing secrets access
     - configuring dotnet user-secrets
     - storing db connection string secret
@@ -265,7 +266,7 @@
 - Azure ADB2C
   - fundamentals (tenant, providers, scopes, flows)
 - authorization
-  - external (ops) vs embedded (dev) 
+  - external (ops) vs embedded (dev)
   - RBAC vs ABAC
 
 ### practical
@@ -283,9 +284,9 @@
     - local identity provider
     - SUSI flow (provider and claims)
 - update deployment with ADB2C API
-    - install and configure nginx RP and openSSL self-signed cert
-    - update and run latest API version
-    - connect to hosted swagger UI
+  - install and configure nginx RP and openSSL self-signed cert
+  - update and run latest API version
+  - connect to hosted swagger UI
 
 ### studio: Visual Oauth
 
@@ -296,10 +297,10 @@
 - setup ADB2C directory
 - link to main subscription
 - configure API application
-    - redirect URIs
-    - API access and published scopes
-    - local identity provider
-    - SUSI flow (provider and claims)
+  - redirect URIs
+  - API access and published scopes
+  - local identity provider
+  - SUSI flow (provider and claims)
 - test SUSI flow using jwt.ms reply URL
 
 ### studio: Deploy ADB2C Integrated API
@@ -312,40 +313,156 @@
   - restart API service
 - connect and explore the final API
 
-# Week 2: Command Line Ops And Troubleshooting With Azure
+# Week 2: Automated Ops & Troubleshooting With Azure
 
-> goal: managing and automating Azure resources from the command line, dev and ops troubleshooting, conceptual overview of out-of-scope ops topics
+> goals: managing and automating azure deployment to a windows server VM from the command line, automated scripting, dev and ops troubleshooting, conceptual overview of out-of-scope ops topics
 
-- changes: greater empahsis on windows server and powershell
+## day 1: introduction to azure CLI and windows server deployment
 
-## day 1:
-
-> goal: introductory powershell scripting and service management with az CLI
+> **goals**: learn about the az CLI and use it to manually deploy to IIS on windows server VM
 
 ### conceptual
 
-- exploring azure CLI (alternative to GUI portal)
-- combining powershell scripting with az CLI
+- introduction to the azure CLI
+  - parallels with the azure web portal GUI
+  - greater access and management of resources
+    - not limited by developing GUI components
+  - core patterns
+    - groups
+      - service / resource management
+    - subgroups
+      - related service / resource / configuration
+    - declarative commands
+      - create
+      - delete
+      - show
+      - list
+        - list-X
+      - group / subgroup specific
+    - help system
+    - query filtering
+- windows server
+  - a more powerful enterprise-grade variant of consumer windows OS
+  - key additions
+    - server manager
+    - administrative control
+    - RDP access
 - RDP
+  - protocol for remote access to windows server
+  - GUI-based full desktop experience
+  - mstsc tool for RDP management
 - IIS
+  - web server implementation
+    - what is a web server and what role does it play?
+      - diagram: where web application code sits relative to the web server container
+  - capabilities
+    - serving static sites
+    - executing and interfacing with embedded web apps
+      - replaces built-in kestrel server of dotnet web apps
+        - single vs multi-site management
+        - TLS termination
+        - better performance
+    - can also behave as a reverse proxy
+  - tool for optimized handling of HTTP
+    - excels at low level networking management and performance concerns
+    - deals with routing logic to static sites or web apps
+    - manages execution and
+    - leaves high level application logic to the web app
 
 ### practical
 
-- configure az CLI
-- access directory and services
-- ops: deploy API from previous week
-  - manual
-    - CLI provisioning
-      - keyvault
-      - VM
-      - ADB2C
-    - RDP as entrypoint to remote server
-      - deliver codebase via git
-      - install and configure MySQL via powershell
-      - Configure IIS and it's dependencies
-        - Create a self-signed cert from IIS
-  - scripting
-    - develop a powershell script to automate the manual CLI steps
+> **goals**: how to provision and configure a windows server VM and keyvault using the az CLI, install and configure IIS over RDP, deploy the ADB2C API version manually
+
+### walkthrough: explore the az CLI
+
+- install and configure az CLI
+  - log in / link account
+  - set defaults
+  - use the `-h` help option to view available groups, subgroups, and related commands
+  - explore groups used in this course
+    - group (rg)
+    - vm
+    - keyvault
+    - network
+- query filtering basics with JMESPath
+  - extracting relevant data
+    - working with lists
+    - working with objects
+  - practical usage
+    - inline evaluation
+    - storing in variables for reuse
+
+### walkthrough: deploying a dotnet core app to windows server
+
+> note: uses a starter API and a shared resource group so the instructor can wipe out and have them start from scratch in the studio
+
+- use az CLI
+  - VM
+    - listing
+      - images
+      - sizes
+    - create
+      - configure VM
+      - set default
+    - show
+      - identity
+      - public IP
+  - network
+    - configure NSG rule to lock down RDP
+- configure VM over RDP
+  - mstsc tool usage
+  - install IIS
+  - install chocolatey package manager
+  - use choco to install dependencies
+    - dotnet SDK
+    - dotnet hosting bundle
+- configure IIS
+  - explore interface
+  - default site exercise
+    - run default site and connect on the remote machine
+    - try connecting from local machine
+      - fail (VM default port 80 closed)
+      - open port using az cli
+      - connect!
+  - replace the default site
+    - create dotnet core starter web api
+    - configure IIS to serve the starter api
+      - CLR reuse
+      - site directory / publishing
+      - port binding
+    - test locally
+
+### studio: deploying the coding events API on windows server
+
+- use az CLI
+  - group
+    - create windows resource group
+      - set default
+  - keyvault
+    - create
+    - set secrets
+      - db connection string
+      - server origin
+    - set access by vm
+  - open port
+    - 443 this time but leave vague to let students apply knowledge
+- RDP into the vm
+  - mstsc using inline eval / var for vm public ip
+  - use choco to install dependencies
+    - git (for "delivery")
+    - mysql (embedded backing service)
+  - setup mysql db / user / permissions
+  - IIS
+    - provision a self-signed cert
+    - configure web app serving to replace default site
+      - correct port binding (443)
+      - use shared CLR
+      - use self-signed cert for TLS termination by IIS
+    - publish to the IIS serving directory
+      - use correct architecture and output dir
+- local
+  - test final deployment!
+  - segue into thinking about how these steps could be automated with scripting (lead-in to day 2)
 
 ## day 2:
 
@@ -372,13 +489,16 @@
 > goal: understand basic steps of CI/CD and basic Azure Pipeline tasks
 
 ### conceptual
+
 - CI/CD basics & Pipeline Tasks
+
   - VCS connection
   - Build
   - Deliver
   - Deploy(?)
-  
+
 ### practical
+
 - Azure Pipeline
   - Windows Server
     - VCS connection
@@ -421,6 +541,7 @@
   - phrasing and terminology
 
 ### practical
+
 - logging
   - viewing logs from az CLI
 - analysis

@@ -19,13 +19,14 @@
 > **practical goals**: practicing publishing, executing and connecting to remote (W/LAN) machines, set up their Azure accounts and explore the Azure Portal
 
 ### day 3: IaaS, web APIs & REST
-> **conceptual goals**: understand purpose and differences between IaaS and on-prem, review web APIs, REST and swagger 
+
+> **conceptual goals**: understand purpose and differences between IaaS and on-prem, review web APIs, REST and swagger
 
 > **practical goals**: explore dotnet web API structure and deploy a basic sqlite backed API to azure linux VM through the Azure Portal
 
 ### day 4: environment configurations & backing services
 
-> **conceptual goals**: learn about backing services, methods of external configurations and secrets management 
+> **conceptual goals**: learn about backing services, methods of external configurations and secrets management
 
 > **practical goals**: learn how to use local user-secrets and remote keyvault and deploy an API backed by an embedded mysql container to an azure linux VM through the Azure Portal
 
@@ -35,7 +36,7 @@
 
 > **practical goals**: explore OAuth, setup ADB2C tenant, deploy ADB2C API version with nginx reverse proxy for self-signed TLS termination through the Azure Portal
 
-# Week 2: Command Line Ops And DevOps Troubleshooting With Azure
+# Week 2: Automated Ops & Troubleshooting With Azure
 
 > **topics**: managing and automating azure deployment to a windows server VM from the command line, automated scripting, dev and ops troubleshooting, conceptual overview of out-of-scope ops topics
 
@@ -65,7 +66,7 @@
 
 > **conceptual goals**: gaining independence with application-level troubleshooting and root cause analysis. gaining independence with ops-level troubleshooting and root cause analysis from the VPC to the VM
 
-> **practical goals**: understanding timeouts and 5XX status codes, VPC-level issues, VM-level issues, communicating and implementing solutions. hands-on troubleshooting by accessing and analyzing logs, tracing 4XX/500 status codes, communicating and implementing solutions 
+> **practical goals**: understanding timeouts and 5XX status codes, VPC-level issues, VM-level issues, communicating and implementing solutions. hands-on troubleshooting by accessing and analyzing logs, tracing 4XX/500 status codes, communicating and implementing solutions
 
 ### day 5: next steps
 
