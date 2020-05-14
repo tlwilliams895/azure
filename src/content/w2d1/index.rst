@@ -1,23 +1,29 @@
 :orphan:
 
-.. _az-cli_index:
+.. _w2-d1_index:
 
-=========
-Azure CLI
-=========
+================================================================
+Day 1: Introduction to the Azure CLI & Windows Server Deployment
+================================================================
 
-Lesson Content
-==============
+Lessons
+=======
 
-- :ref:`az-cli_conceptual`
+#. :ref:`lesson-1_az-cli`
 
-Walkthrough
-===========
+Walkthroughs
+============
 
-- :ref:`az-cli_walkthrough`
+#. :ref:`walkthrough-1_az-cli`
+
+Studios
+=======
 
 Resources
 =========
+
+Azure CLI
+---------
 
 - `Microsoft: Azure CLI documentation <https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest>`_
 - `Microsoft: Azure CLI getting started <https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli?view=azure-cli-latest>`_
