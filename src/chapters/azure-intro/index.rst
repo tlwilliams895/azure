@@ -11,3 +11,4 @@ Introduction to Cloud Hosting, Azure, and VMs
    virtual-machine
    walkthrough
    studio
+   studio-2
