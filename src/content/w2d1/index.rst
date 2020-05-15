@@ -10,6 +10,7 @@ Lessons
 =======
 
 #. :ref:`lesson-1_az-cli`
+#. :ref:`lesson-2_az-cli`
 
 Walkthroughs
 ============
