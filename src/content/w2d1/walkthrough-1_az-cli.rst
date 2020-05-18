@@ -496,7 +496,6 @@ Next Step
 Before moving on let's clean up after ourselves by deleting the resource group. This will delete all of the resources contained in it so we don't use up our subscription credits. Notice how we don't have to specify the group because it has been set as a default:
 
 .. sourcecode:: powershell
-    :caption: Windows/PowerShell
 
     # when prompted enter y for yes
     > az group delete
