@@ -6,22 +6,26 @@
 Why should we use a CLI instead of a web portal?
 ================================================
 
-Up to this point we have been using the Azure Web Portal to provision and manage our Azure resources. Using the terminology we have learned we would refer to this site as a graphical user interface, or GUI. GUIs can be convenient and intuitive to use but inherently fall behind the capabilities of their text-based counterpart -- the CLI.
+Up to this point we have been using the Azure Web Portal to provision and manage our Azure resources. Using the terminology we have learned we would refer to this site as a graphical user interface, or GUI. GUIs can be convenient and intuitive to use but have different use cases than their text-based counterpart -- the CLI.
 
-The Azure Web Portal, with its intuitive layout and interactive menus, is actually just a "skin" that is backed by a comprehensive "brain" of a REST API. Any actions you take on the web portal to manage your Azure resources are ultimately fulfilled by HTTP requests sent `to this REST API <https://docs.microsoft.com/en-us/rest/api/azure/>`_. Can you think why they would develop a REST API that is distinct from the online GUI?
+The Azure Web Portal, with its intuitive layout and interactive menus, is actually just a "skin" that is backed by a comprehensive "brain" of a REST API. Any actions you take on the web portal to manage your Azure resources are ultimately fulfilled by HTTP requests sent `to this REST API <https://docs.microsoft.com/en-us/rest/api/azure/>`_. What are the benefits of developing a REST API that is distinct from the online GUI?
 
 Recall that one of the many benefits of having a standalone API is that it operates **independent of any user interface(s) that consume it**. By separating their data management [API] from their presentation [UI] they are able to support flexibility and **multiple user interfaces** against a single consistent service. In the case of Azure that single REST API supports both the GUI web portal *and* the ``az CLI``.
 
 .. todo:: diagram showing Azure -> REST API ->/-> Web Portal / CLI
 
-At this point you understand the design decision of decoupling their API from their UIs, but the question still remains -- why should we bother using a CLI? Text-based interfaces are so *dated* aren't they? While GUIs are great to look at, and arguably offer a more intuitive experience *to a human*, they fall short in three key areas -- end user access, workflow speed and automation capability.
+At this point you understand the design decision of decoupling their API from their UIs, but the question still remains -- why should we bother using a CLI? GUIs are great to look at and arguably offer a more intuitive experience *to a human*. But when it comes to programmatic management CLIs shine in the following key areas:
+
+- feature accessibility
+- workflow efficiency
+- automation capability
 
 The GUI Delay
 -------------
 
 A GUI inherently requires additional development work to produce the layouts, buttons, and other components needed for a user to interact with it. Their graphical nature will always be more complex to develop and maintain than a text-based, CLI, counterpart.
 
-This difference seems arbitrary to you as the end user. It may appear to only burden the Azure maintainers. But as the end user you are restricted to only using what has been developed by their teams. Whenever a new resource or service is supported internally by Azure it takes time for both GUI and CLI to have the feature added. The process looks something like:
+This difference seems arbitrary to you as the end user. It may appear to only burden the Azure maintainers. But as the end user you are restricted to only using what has been developed by their teams. Whenever a new resource, service or capability is supported internally by Azure it takes time for both GUI and CLI to have the feature added for use. The process looks something like:
 
 #. internal development of new feature
 #. implement support in the Azure REST API
@@ -34,21 +38,21 @@ And what about the more granular management tasks that you may need to perform o
 
 .. admonition:: Fun Fact
 
-    The only interface that exposes greater access to Azure resources over the CLI is the REST API itself. You can make requests directly to the REST API through any HTTP client like a browser, ``curl``, or the ``az CLI``. But most of the time it is a tedious process not meant for humans.
+    The only interface that exposes greater access to Azure resources over the CLI is the REST API itself. You can make requests directly to the REST API through any HTTP client like a browser, ``curl``, or the ``az CLI``. But most of the time it is a tedious process not meant for day-to-day use.
 
 There are two key takeaways here about a system, of which Azure is but one example, which supports both a GUI and CLI:
 
-- **the CLI will always receive the latest additions and updates before the GUI**
-- **the CLI will always have more granular management capabilities than its GUI counterpart**
+- **the CLI will receive the latest additions and updates before the GUI**
+- **the CLI will have more granular management capabilities that aren't present on the GUI**
 
-While the purpose of this lesson is to inspire your understanding and appreciation for CLIs they *are not always the best choice*. Sometimes GUIs offer an abstraction over more tedious work that can make them worth using. Like most things in the development world you should not blindly adhere to a single approach. What is most important is to select the right tool for the job that empowers your workflow. 
+While the purpose of this lesson is to inspire your understanding and appreciation for CLIs they *are not always the best choice*. Sometimes GUIs offer an abstraction over more tedious work that can make them worth using. Like most things in the development world you should not blindly adhere to a single approach. What is most important is **to select the right tool for the job** that empowers your workflow. 
 
 Work Velocity
 -------------
 
-When it comes to humans interacting with computers there is little doubt that GUIs are more intuitive to work with. But you are no mere human -- you are a technical powerhouse that has work to do! As a technical user your top priority is in choosing an interface that improves your workflow efficiency.
+When it comes to humans interacting with computers there is little doubt that GUIs are more intuitive to work with. But as a technical user your top priority is in choosing an interface that helps you get the job done quickly. On the whole CLIs are the speedier choice for power users because they enable you to issue the exact commands you need and bypass visual distractions. 
 
-On the whole CLIs are the speedier choice for power users. They trade ease of exploration, beneficial to newcomers, for brevity and precise control. Whereas GUIs excel in visually guiding you, CLI tools leave it to you to be the guide. CLIs require you to be direct with what you need done but by doing so allow you to work more efficiently. 
+CLIs trade ease of exploration, beneficial to newcomers, for brevity and precise control. Whereas GUIs excel in visually guiding you, CLI tools leave it to you to be the guide. They require you to be direct with what you need done but by doing so allow you to complete your tasks more efficiently. 
 
 As an example, let's consider the process of provisioning a new VM from both the web GUI and the ``az CLI``.
 
@@ -97,4 +101,4 @@ This is just one of thousands of automation examples you will come across in you
 Next Step
 =========
 
-At this point you must be enamored by the power of the ``az CLI``! No? Alright, well maybe after you see it in action you will be! Move on to the :ref:`lesson-2_az-cli` article to get it installed and learn how to put it to use to manage your Azure resources.
+At this point you understand the strengths of CLI tools like the ``az CLI`` and are ready to see how it can be used. In the :ref:`lesson-2_az-cli` article we will explore how its commands are organized and used to manage your Azure resources.
