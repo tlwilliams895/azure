@@ -8,16 +8,20 @@ Provisioning Resources Using the Azure CLI
 
 In this walkthrough we will practice using the ``az CLI`` to provision the same resources that we spun up using the web portal GUI. As you work through these commands try to picture the manual steps you performed on the web portal and use your knowledge of the ``az CLI`` patterns to translate those steps into CLI commands.
 
-Although you can simply read through this guide it is important that you actively attempt each command on your machine. The more practice you get the more comfortable you will get with using it.
+Although you can simply read through this guide it is important that you actively attempt each command on your machine. The more practice you get the more comfortable you will be with using it.
 
 For each resource we provision we will use a methodical approach:
 
-- **Exploration**: use the help command to learn about the top level Group of the resource
+- **Exploration**: issue a help command to learn about the the resource
 - **Planning**: consider our tasks and what Commands, Sub-Groups and Arguments are needed to accomplish them
-- **Provisioning**: put our Planning into action and provision the resources
+- **Provisioning**: put our Planning into action and provision the resource
 - **Configuring**: any extra steps that use the new resource to complete our tasks
 
-As you continue to work with the ``az CLI`` you will find this approach beneficial to efficiently navigating and putting together the commands you need. A good idea is to keep a running set of notes for easy access to common tasks you are faced with. These notes will prove invaluable when you begin composing commands together into scripts. 
+This is a process you can carry with you as you continue to work with the ``az CLI`` and other tooling. A good idea is to start a set of notes for easy access to common tasks you are faced with. These notes will prove invaluable when you begin composing commands together into automation scripts. 
+
+.. note::
+
+    As a cross-platform tool all of the base commands will work the same on any OS or shell. In some cases we will utilize shell-specific syntax to accomplish our tasks. Where there are syntactical differences the commands for both Linux/BASH and Windows/PowerShell will be presented.
 
 Setup
 =====
@@ -28,7 +32,10 @@ Before we begin you have to log in with your Azure subscription. This command wi
 
     > az login
 
-Once you are logged in we will make use of the global ``configure`` Command to set defaults for the CLI. This will make working with resources easier by automatically inserting default values for common required Arguments. Let's set a default Azure Location for our resources.
+Configuring Defaults
+--------------------
+
+Once you are logged in you can make use of the global ``configure`` Command to set defaults for the CLI. This will make working with resources easier by automatically inserting default values for common required Arguments. Let's set a default Azure Location for our resources.
 
 .. sourcecode:: powershell
 
@@ -39,7 +46,7 @@ Now any resource that has a required Argument of ``--location`` or ``-l`` will a
 Resource Groups
 ===============
 
-As always we will begin by provisioning a resource group to bundle all of the other resources associated with it. One of the benefits of this approach is that it is easy to dispose of all of the resources by deleting the resource group they are contained in instead of deleting each of them individually.
+As always we will begin by provisioning a resource group to bundle together the other resources associated with it. One of the benefits of this approach is that it is easy to dispose of all of the resources by deleting the resource group they are contained in instead of deleting each of them individually.
 
 Exploration
 -----------
@@ -122,20 +129,18 @@ For this walkthrough we will not be using our VM to deploy an application but si
 Exploration
 -----------
 
-Virtual Machines are naturally more complex to interact with than a simple resource group. However, now that we understand the pattern of the ``az CLI`` that complexity can be managed by taking our time to methodically work our way through it.
+Virtual Machines are naturally more complex to interact with than a simple resource group. However, now that we understand the pattern of the ``az CLI`` that complexity can be managed using the help command to methodically work our way through its Sub-Groups and Commands.
 
-Once again let's begin by assessing what is available to us using the ``help`` argument:
+Once again let's begin by assessing what is available to us:
 
 .. sourcecode:: powershell
 
     > az vm -h
 
-This time we see an abundance of Sub-Groups and Commands.
-
 Planning
 --------
 
-Creating a VM will naturally require many Arguments to customize it. Recall in the web portal how there were several menus we had to work through. In addition to all of those options, CLIs expose additional configuration Arguments that serve more niche use cases. 
+Creating a VM will naturally require many Arguments to customize it. Recall in the web portal how there were several menus we had to work through to provision it. In addition to all of those options the ``az CLI`` exposes additional configuration Arguments for more granular control. 
 
 Let's see what Arguments are associated with creating a VM:
 
@@ -146,10 +151,12 @@ Let's see what Arguments are associated with creating a VM:
 From this long list of arguments we will need to provide values for the following:
 
 - ``-n``: the name of the VM
-- ``--image``: the URN of the image used to create the VM
+- ``-l``: the location [default configured]
+- ``-g``: the resource group name [default configured]
 - ``--size``: the size of the VM
+- ``--image``: the URN of the image used to create the VM
 - ``--admin-username``: the username of the root account for the VM
-- ``--assign-identity``: to assign an identity to the VM for accessing the KeyVault secrets
+- ``--assign-identity``: to assign an identity to the VM for granting access to the KeyVault secrets
 
 Listing Images
 ^^^^^^^^^^^^^^
@@ -182,25 +189,28 @@ From here we can see the URN we need for the Ubuntu image is ``"Canonical:Ubuntu
 
 Now we can reference the URN by its variable name ``$ImageURN`` or ``image_urn`` depending on your shell.
 
-.. tip::
+.. admonition:: tip
 
-    You can make use of a slightly more advanced query and in-line evaluation to do this in one step. Here we use a filter on the list to only output objects whose URN value contains the string Ubuntu. Then we pipe the result and access the first element's URN value.
+    You can make use of a slightly more advanced query and in-line evaluation to do this in one step. Below we use a filter on the list to only output objects whose URN property ``contains`` the string Ubuntu. Then we pipe the filtered list and assign the first element's URN value to the variable.
 
     .. sourcecode:: powershell
-    
+        :caption: filtering the image list
+
         > az vm image list --query "[? contains(urn, 'Ubuntu')] | [0].urn"
 
-    When we issue this command using in-line evaluation we can assign the resulting URN value output directly to the variable:
+    When we issue this command using in-line evaluation we can assign output directly to the variable:
 
     .. sourcecode:: powershell
-    
+        :caption: Windows/PowerShell
+
         > $ImageURN="$(az vm image list --query "[? contains(urn, 'Ubuntu')] | [0].urn")" 
 
+    When using the BASH shell there is a known `issue <https://github.com/Azure/azure-cli/issues/8401>`_ with the default JSON format where it includes quote characters ``""`` around single string outputs. Unfortunately this can break commands and scripts in BASH so we need to request a TSV output format to correct it:
+
     .. sourcecode:: bash
-        :caption: If you are on Linux/BASH use the command below
-    
-        # -o: tsv sets the output to TSV format to remove the double quotes around the output
-        # the quotes are treated as character literals by BASH and can break commands and scripts
+        :caption: Linux/BASH
+
+        # -o: tsv sets the output to TSV format to remove the double quote characters
         $ image_urn="$(az vm image list --query "[? contains(urn, 'Ubuntu')] | [0].urn" -o tsv)" 
 
 Provisioning
@@ -211,6 +221,7 @@ Now that we have our image URN we can provision the VM. We will use the followin
 - ``-n``: <name>-linux-vm
 - ``--size``: Standard_B2s
 - ``--admin-username``: student
+- ``--image``: the image URN [stored in a variable]
 
 .. note::
 
@@ -236,7 +247,7 @@ You should receive an output like this:
         "fqdns": "",
         "id": "/subscriptions/<subscription ID>/resourceGroups/<name>-wt-rg/providers/Microsoft.Compute/virtualMachines/<name>-linux-vm",
         "identity": {
-            "systemAssignedIdentity": "37dac2fe-ad6b-4b35-b03c-082b6f6bc524",
+            "systemAssignedIdentity": "<vm object ID>",
             "userAssignedIdentities": {}
         },
         "location": "eastus",
@@ -347,10 +358,10 @@ We will need to provide:
 
 - ``-n``: the name of the KeyVault
 - ``-g``: the resource group it belongs to [default configured]
-- ``--object-id``: the VM object ID to uniquely identify it
-- ``--secret-permissions``: space-separated list of access permissions to secrets for the VM
+- ``--object-id``: the VM object ID that uniquely identifies it for granting access
+- ``--secret-permissions``: space-separated list of access permissions to secrets to grant the VM
 
-Of the many available permissions which should we choose to grant? The right choice is ``get list`` which equates to read-only access. We should grant the **least-privileged access** possible to the VM by only allowing it to read the secret names and values for this specific KeyVault. We do not want to expose the ability for the VM to modify, or worse, delete the secrets of our KeyVault if it were to fall into an attacker's hands. 
+We will discuss how the ``--object-id`` and ``--secret-permissions`` arguments will be defined in the KeyVault Configuration section.
 
 Provisioning
 ------------
@@ -377,12 +388,13 @@ Before issuing the command let's store the KeyVault name in a variable since we 
 
 After the KeyVault has been provisioned let's set the connection string secret name and value:
 
+- ``--vault-name``: the KeyVault name [stored in a variable]
 - ``name``: "ConnectionStrings--Default"
 - ``value``: "server=localhost;port=3306;database=coding_events;user=coding_events;password=launchcode"
 
-.. tip::
+.. admonition:: tip
 
-    Recall that secrets are just entries of ``application.properties`` that we need to keep private and out of version control. The ``--`` is used as shorthand to define properties of JSON objects in a single "flat" string for the CLI command. In this case it is used to define a property called ``Default`` of a ``ConnectionStrings`` JSON object:
+    Recall that secrets are like the other JSON entries in ``application.properties`` that we need to keep private and out of version control. The ``--`` is used as shorthand to define properties of JSON objects in a single "flat" string for the CLI command. In this case it is used to define a property called ``Default`` of a ``ConnectionStrings`` JSON object that would look like this:
 
     .. sourcecode:: json
 
@@ -403,4 +415,92 @@ After the KeyVault has been provisioned let's set the connection string secret n
 Configuring
 -----------
 
-Now that the KeyVault and connection string secret have been set we just need to set the access policy for the VM.
+Now that the KeyVault and connection string secret have been managed, all that remains is to to set the access policy for the VM. Earlier we listed two arguments needed for the ``set-policy`` KeyVault command that whose values weren't immediately obvious, the ``--object-id`` and ``--secret-permissions``.
+
+Getting the VM Object ID
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+In order to grant access to a resource we need to provide a unique identifier for it. Earlier when we provisioned our VM we used the ``--assign-identity`` argument to generate and assign a **service principal identifier**. Azure documentation refers to this identifier as either a **principal ID** or an **object ID**. 
+
+The VM ``show`` command provided us with a JSON object of configuration details. Issue the ``show`` command again and look for the ``identity`` object property. Within this sub-object is the ``principalId`` that we need.
+
+We can capture this value in a variable by combining the VM ``show`` command with a ``--query`` filter:
+
+.. sourcecode:: powershell
+    :caption: Windows/PowerShell
+
+    > $VmObjectId="$(az vm show --query "identity.principalId")"
+
+.. sourcecode:: bash
+    :caption: Linux/BASH
+
+    $ vm_object_id="$(az vm show --query "identity.principalId" -o tsv)"
+
+.. tip::
+
+    While exploring the VM Group you may have noticed a Sub-Group called ``identity`` which is a shortcut for accessing the same information. How would you modify your command and ``--query`` to use this Sub-Group instead?
+
+Least-Privileged Access
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``--secret-permissions`` argument accepts a space-separated list of permissions you would like to grant to the given resource object, our VM in this case. Of the many available permissions which should we choose to grant and why?
+
+Whenever you are granting permissions you want to follow the concept of **least-privileged access**. In an ideal world your resources play responsibly with each other. But in the real world benign misuse due to bugs or malicious control from attackers can lead to disastrous consequences. 
+
+
+.. tip::
+
+    Granting **least-privileged access** means to grant the bare minimum permissions needed to support the current use case. 
+
+If in the future a resource needs additional permissions it is trivial to grant them by simply issuing another ``set-policy`` command. However, if you grant broad permissions from the start it can be challenging at best to undo the actions that an over-privileged service performs if misused. It is important to always review the access permissions and consider their ramifications before granting them. 
+
+The right choice in our case is to grant read-only access to the API's KeyVault secrets. We can grant ``list`` for accessing the names of secrets and ``get`` for accessing the individual secret values.
+
+Granting VM Access
+^^^^^^^^^^^^^^^^^^
+
+It's now time to issue our final command:
+
+.. sourcecode:: powershell
+    :caption: Windows/PowerShell
+
+    > az keyvault set-policy -n "$KeyVaultName" --object-id "$VmObjectId" --secret-permissions get list 
+
+.. sourcecode:: bash
+    :caption: Linux/BASH
+
+    $ az keyvault set-policy -n "$keyvault_name" --object-id "$vm_object_id" --secret-permissions get list
+
+If everything went well you should get a confirmation output with a new entry under ``properties.accessPolicies`` for our VM that looks like this:
+
+.. sourcecode:: json
+
+    {
+        "applicationId": null,
+        "objectId": "<vm object ID>",
+        "permissions": {
+          "certificates": null,
+          "keys": null,
+          "secrets": [
+            "get",
+            "list"
+          ],
+          "storage": null
+        },
+        "tenantId": "<azure directory ID>"
+    }
+
+Next Step
+=========
+
+Before moving on let's clean up after ourselves by deleting the resource group. This will delete all of the resources contained in it so we don't use up our subscription credits. Notice how we don't have to specify the group because it has been set as a default:
+
+.. sourcecode:: powershell
+    :caption: Windows/PowerShell
+
+    # when prompted enter y for yes
+    > az group delete
+
+.. todo:: discuss using service principals for CLI use vs logging in? refer to the addition of our personal account in the access policies list
+
+Congratulations on learning a new way of managing your Azure resources. Now that you have tried both the CLI and GUI, which do you prefer and why? Take a moment to consider how all of these steps could be accomplished in a single command by composing them into a script. When you are ready head over to the :ref:`lesson-3_ws-iis` article to learn about provisioning and configuring a new type of VM -- the Windows Server!
