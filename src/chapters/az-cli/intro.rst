@@ -1,7 +1,3 @@
-:orphan:
-
-.. _lesson-1_az-cli:
-
 ================================================
 Why should we use a CLI instead of a web portal?
 ================================================
@@ -21,7 +17,7 @@ At this point you understand the design decision of decoupling their API from th
 - automation capability
 
 The GUI Delay
--------------
+=============
 
 A GUI inherently requires additional development work to produce the layouts, buttons, and other components needed for a user to interact with it. Their graphical nature will always be more complex to develop and maintain than a text-based, CLI, counterpart.
 
@@ -48,7 +44,7 @@ There are two key takeaways here about a system, of which Azure is but one examp
 While the purpose of this lesson is to inspire your understanding and appreciation for CLIs they *are not always the best choice*. Sometimes GUIs offer an abstraction over more tedious work that can make them worth using. Like most things in the development world you should not blindly adhere to a single approach. What is most important is **to select the right tool for the job** that empowers your workflow. 
 
 Work Velocity
--------------
+=============
 
 When it comes to humans interacting with computers there is little doubt that GUIs are more intuitive to work with. But as a technical user your top priority is in choosing an interface that helps you get the job done quickly. On the whole CLIs are the speedier choice for power users because they enable you to issue the exact commands you need and bypass visual distractions. 
 
@@ -74,7 +70,7 @@ Using the CLI you would need to open your terminal and enter a single command:
 On the one hand the GUI is helpful in providing visual cues and menus to guide you through the process. On the other hand the CLI allows you to skip directly to issuing the exact instructions for the work you need done. This is just one example that highlights the conciseness with regard to *manual* steps. But the real power of CLI tools comes in their automation capabilities.
 
 Automation Showdown
--------------------
+===================
 
 While the CLI is faster to work with we only looked through the lens of manually interacting with the two interfaces. Eventually the goal of any ops specialist is to automate their work! Automation is as much about saving valuable work time as it is about **ensuring consistent behavior**. 
 
@@ -101,4 +97,4 @@ This is just one of thousands of automation examples you will come across in you
 Next Step
 =========
 
-At this point you understand the strengths of CLI tools like the ``az CLI`` and are ready to see how it can be used. In the :ref:`lesson-2_az-cli` article we will explore how its commands are organized and used to manage your Azure resources.
+At this point you understand the strengths of CLI tools like the ``az CLI`` and are ready to see how it can be used. In the :ref:`cli-pattern` article we will explore how its commands are organized and used to manage your Azure resources.

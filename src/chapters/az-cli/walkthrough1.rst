@@ -1,6 +1,4 @@
-:orphan:
-
-.. _walkthrough-1_az-cli:
+.. _walkthrough1:
 
 ==========================================
 Provisioning Resources Using the Azure CLI
@@ -524,4 +522,4 @@ After reviewing your resources it's time to clean up after ourselves by deleting
 
 .. todo:: discuss using service principals for CLI use vs logging in? refer to the addition of our personal account in the access policies list
 
-Congratulations on learning a new way of managing your Azure resources. Now that you have tried both the CLI and GUI, which do you prefer and why? Take a moment to consider how all of these steps could be accomplished in a single command by composing them into a script. When you are ready head over to the :ref:`lesson-3_ws-iis` article to learn about provisioning and configuring a new type of VM -- the Windows Server!
+Congratulations on learning a new way of managing your Azure resources. Now that you have tried both the CLI and GUI, which do you prefer and why? Take a moment to consider how all of these steps could be accomplished in a single command by composing them into a script. When you are ready head over to the :ref:`walkthrough2` article to learn about provisioning and configuring a new type of VM -- the Windows Server!

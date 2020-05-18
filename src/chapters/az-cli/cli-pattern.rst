@@ -1,6 +1,4 @@
-:orphan:
-
-.. _lesson-2_az-cli:
+.. _cli-pattern:
 
 ================================
 Azure CLI Practical Fundamentals
@@ -116,7 +114,7 @@ As a concrete example let's consider how to request help about the ``vm`` Group:
 While the CLI may feel foreign initially you can use the ``help`` argument at any time to guide you. It is in your best interest to practice digging through the Groups, Sub-Groups and Commands using the ``help`` argument to familiarize yourself.
 
 Groups
-------
+======
 
 Groups are the main resources and services that the ``az CLI`` exposes control over. Some examples we will be using include:
 
@@ -135,7 +133,7 @@ You can see all of the Groups and global Commands available in the ``az CLI`` by
     $ az --help
 
 Sub-Groups
-----------
+==========
 
 Within each of these Groups will be Sub-Groups that let you manage related features or properties of the Group resource. For example under the Group ``vm`` you would find the related Sub-Group ``identity`` which refers to the VM identity configuration. Similarly under ``keyvault`` you would find the Sub-Group ``secret`` for managing KeyVault secrets.
 
@@ -155,7 +153,7 @@ Try entering the following commands to see the Sub-Groups related to the ``vm`` 
     $ az keyvault -h
 
 Commands
---------
+========
 
 Commands are declaratively named actions that you can take on a Group or Sub-Group. They will typically include CRUD commands along with others that fit the context. The common CRUD commands you will see include:
 
@@ -185,7 +183,7 @@ For example looking at the Commands related to the ``vm`` Group you will see man
 Notice how many of these aren't available at all in the GUI! As a reminder Sub-Groups will also have their own Commands list which can be accessed the same way using the ``help`` argument.
 
 Arguments
----------
+=========
 
 Like most CLI tools commands also accept a series of Arguments, sometimes referred to as "flags" or "options". Think of these as modifiers for a given Command. They are used to give additional context or configure settings for performing a Command a specific way. The ``help`` argument is itself an example of one of these that happens to apply *globally* and not just for one Command.
 
@@ -221,4 +219,4 @@ Note that these arguments can be exhaustive especially compared to what is avail
 Next Step
 =========
 
-Now that you understand the pattern for navigating and using the ``az CLI`` it's time to put it to use! In the :ref:`walkthrough-1_az-cli` article you will get a chance to provision resources without using the web portal GUI. This is your first step towards the eventual goal of learning how to automate these tasks. As you go through the walkthrough think about how you can combine your knowledge of scripting to compose the individual ``az CLI`` commands.
+Now that you understand the pattern for navigating and using the ``az CLI`` it's time to put it to use! In the :ref:`walkthrough1` article you will get a chance to provision resources without using the web portal GUI. This is your first step towards the eventual goal of learning how to automate these tasks. As you go through the walkthrough think about how you can combine your knowledge of scripting to compose the individual ``az CLI`` commands.

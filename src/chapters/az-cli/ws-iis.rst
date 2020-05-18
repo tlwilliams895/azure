@@ -1,6 +1,4 @@
-:orphan:
-
-.. _lesson-3_ws-iis:
+.. _ws-iis:
 
 ====================================
 Introduction to Windows Server & IIS
