@@ -38,7 +38,7 @@ And what about the more granular management tasks that you may need to perform o
 
 .. admonition:: Fun Fact
 
-    The only interface that exposes greater access to Azure resources over the CLI is the REST API itself. You can make requests directly to the REST API through any HTTP client like a browser, ``curl``, or the ``az CLI``. But most of the time it is a tedious process not meant for day-to-day use.
+    The only interface that exposes greater access to Azure resources over the CLI is the REST API itself. After all, a REST API is just another *interface* that happens to use HTTP requests instead of graphics or the command line. You can make requests directly to the REST API through any HTTP client like a browser, ``curl``, or the ``az CLI`` itself. But most of the time it is a tedious process not meant for day-to-day use when compared to using the GUI or CLI.
 
 There are two key takeaways here about a system, of which Azure is but one example, which supports both a GUI and CLI:
 

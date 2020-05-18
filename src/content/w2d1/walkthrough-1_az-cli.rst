@@ -39,14 +39,26 @@ Once you are logged in you can make use of the global ``configure`` Command to s
 
 .. sourcecode:: powershell
 
+    # -d can also be used as a shorthand 
     > az configure --default location=eastus
 
 Now any resource that has a required Argument of ``--location`` or ``-l`` will automatically have ``eastus`` set as its value.
 
+.. admonition:: note
+
+    We will use the ``configure`` Command to set defaults for common Arguments throughout this walkthrough. You can change your default values at any time by re-issuing the command with new ``name=value`` pairs. 
+    
+    You can also view your defaults using the ``--list-defaults`` Argument:
+
+    .. sourcecode:: powershell
+
+        # -l can also be used as a shorthand
+        > az configure --list-defaults
+
 Resource Groups
 ===============
 
-As always we will begin by provisioning a resource group to bundle together the other resources associated with it. One of the benefits of this approach is that it is easy to dispose of all of the resources by deleting the resource group they are contained in instead of deleting each of them individually.
+As always we will begin by provisioning a resource group to hold the other resources associated with it. Resource groups are an organizational tool to keep track of and manage resources as a whole instead of individually. One of the benefits of this approach is that it is easy to dispose of all of the resources by deleting the resource group they are contained in instead of deleting each of them one-by-one.
 
 Exploration
 -----------
@@ -73,9 +85,9 @@ We will need to provide at minimum the two **required** arguments:
 - ``-n`` or ``-g``: the name of the resource group
 - ``-l``: the Azure Location
 
-Fortunately we have already configured our default Location value of ``eastus`` so all we need to supply is the resource group name. We will use a consistent naming convention to make sure none of our resources have conflicting names. The convention for resource groups we will use is "your name" + "wt" (walkthrough) + "rg" (resource group):
+Fortunately we have already configured our default Location value of ``eastus`` so all we need to supply is the resource group name. We will use a consistent naming convention to make sure none of our resources have conflicting names. The convention for resource groups we will use is "your name" + "cli-wt" (CLI walkthrough) + "rg" (resource group):
 
-    <first name>-wt-rg
+    <name>-cli-wt-rg
 
 Note that there is a 23 character limit for resource names. If you have a long first name consider using a short name like Pat if your name is Patrick.
 
@@ -86,17 +98,17 @@ Now that we have determined the command structure and its arguments we can creat
 
 .. sourcecode:: powershell
 
-    > az group create -n <name>-wt-rg
+    > az group create -n <name>-cli-wt-rg
 
 You should see a JSON output like this:
 
 .. sourcecode:: bash
 
     {
-        "id": "/subscriptions/<subscription ID>/resourceGroups/<name>-wt-rg",
+        "id": "/subscriptions/<subscription ID>/resourceGroups/<name>-cli-wt-rg",
         "location": "eastus",
         "managedBy": null,
-        "name": "<name>-wt-rg",
+        "name": "<name>-cli-wt-rg",
         "properties": {
             "provisioningState": "Succeeded"
         },
@@ -113,7 +125,7 @@ Just as we set a default location we will assign this resource group as a defaul
 
 .. sourcecode:: powershell
 
-    > az configure --default group=<name>-wt-rg
+    > az configure --default group=<name>-cli-wt-rg
 
 You can confirm the default has been set by checking the CLI configuration with the ``-l`` (list) argument and seeing that the "group" has value has been set correctly:
 
@@ -167,9 +179,9 @@ In order to define the image for the VM we have to find its URN. In the ``vm cre
 
     > az vm image list
 
-Many different images are provided in the JSON object list output. But all we care for is the URN values. We could manually scroll through all of them to find the URN of the Ubuntu image. Or we can make use of the global ``--query`` argument to output only the data we need!
+Many different images are provided in the JSON object list output. But all we care for is the URN values. We could manually scroll through all of them to find the URN of the Ubuntu image. Or we can make use of the global ``--query`` Argument to output only the data we need!
 
-The JMESPath query value we will use is ``"[].urn"`` which means take the list ``[]`` and instead of the full image objects only output the value of the ``urn`` property for each of them. The result is a list of just URN values which is much easier to work with!
+The `JMESPath query<https://jmespath.org/>`_ value we will use is ``"[].urn"`` which means take the output list ``[]`` and instead of the complete image objects only output the value for each of their the ``urn`` properties. The result is a list of just URN values which is much easier to work with!
 
 .. sourcecode:: powershell
 
@@ -187,7 +199,7 @@ From here we can see the URN we need for the Ubuntu image is ``"Canonical:Ubuntu
 
     $ image_urn="Canonical:UbuntuServer:18.04-LTS:latest"
 
-Now we can reference the URN by its variable name ``$ImageURN`` or ``image_urn`` depending on your shell.
+Now we can reference the URN by its variable name ``$ImageURN`` or ``image_urn`` depending on your chosen shell.
 
 .. admonition:: tip
 
@@ -245,7 +257,7 @@ You should receive an output like this:
 
     {
         "fqdns": "",
-        "id": "/subscriptions/<subscription ID>/resourceGroups/<name>-wt-rg/providers/Microsoft.Compute/virtualMachines/<name>-linux-vm",
+        "id": "/subscriptions/<subscription ID>/resourceGroups/<name>-cli-wt-rg/providers/Microsoft.Compute/virtualMachines/<name>-linux-vm",
         "identity": {
             "systemAssignedIdentity": "<vm object ID>",
             "userAssignedIdentities": {}
@@ -255,7 +267,7 @@ You should receive an output like this:
         "powerState": "VM running",
         "privateIpAddress": "10.0.0.4",
         "publicIpAddress": "13.72.111.180",
-        "resourceGroup": "<name>-wt-rg",
+        "resourceGroup": "<name>-cli-wt-rg",
         "zones": ""
     }
 
@@ -445,16 +457,24 @@ Least-Privileged Access
 
 The ``--secret-permissions`` argument accepts a space-separated list of permissions you would like to grant to the given resource object, our VM in this case. Of the many available permissions which should we choose to grant and why?
 
-Whenever you are granting permissions you want to follow the concept of **least-privileged access**. In an ideal world your resources play responsibly with each other. But in the real world benign misuse due to bugs or malicious control from attackers can lead to disastrous consequences. 
+In an ideal world your resources interact responsibly with each other and everything goes according to plan. But there can be disastrous consequences if they are given greater access privileges than needed to support that plan. 
 
+Whenever you are granting permissions you want to follow the concept of **least-privileged access**: 
 
 .. tip::
 
-    Granting **least-privileged access** means to grant the bare minimum permissions needed to support the current use case. 
+    Granting **least-privileged access** means to grant the bare minimum permissions needed to support the **current use case**.
 
-If in the future a resource needs additional permissions it is trivial to grant them by simply issuing another ``set-policy`` command. However, if you grant broad permissions from the start it can be challenging at best to undo the actions that an over-privileged service performs if misused. It is important to always review the access permissions and consider their ramifications before granting them. 
+Mistakes can happen within your team due to bugs or misconfigurations that, without access restriction, can result in havoc. For example, imagine a VM that due to a bug and broad access ends up deleting or overwriting mission-critical KeyVault secrets. If instead its access were restricted initially the result would have just been a crash report when its bugged request was rejected by the access policy. 
 
-The right choice in our case is to grant read-only access to the API's KeyVault secrets. We can grant ``list`` for accessing the names of secrets and ``get`` for accessing the individual secret values.
+Even worse is the threat of a malicious user that gains access to a resource within the system. Many of the high-profile security failures you hear about were predicated on an attacker exploiting an over-privileged resource to do things it was never intended to do. Without proper access control these sorts of scenarios are a real threat to the work you do.
+
+Never grant broad access because "we might need it later" or out of laziness. Granting additional access permissions is trivial if needed in the future by simply issuing another ``set-policy`` command. However, if you grant broad permissions from the start it can be challenging at best to undo the actions that an over-privileged service performs when misused. It is important to always review the available access permissions and consider their ramifications before granting them. 
+
+In our case the API hosted by the VM only needs the ability to *read* from its KeyVault. It has no need for writing or deletion capabilities. The minimum permissions we need to grant to the VM to support this use case are:
+
+- ``list``: for accessing the names of secrets
+- ``get``: for accessing the individual secret values
 
 Granting VM Access
 ^^^^^^^^^^^^^^^^^^
@@ -493,7 +513,9 @@ If everything went well you should get a confirmation output with a new entry un
 Next Step
 =========
 
-Before moving on let's clean up after ourselves by deleting the resource group. This will delete all of the resources contained in it so we don't use up our subscription credits. Notice how we don't have to specify the group because it has been set as a default:
+Before moving on let's revisit the web portal and see all the resources we created. Look for your CLI walkthrough resource group. Take a few minutes to see how all of the configurations you performed from the CLI resulted in the same resources as the ones you provisioned before. Remember that the CLI and GUI are just *interfaces* for interacting with the central API that backs them. 
+
+After reviewing your resources it's time to clean up after ourselves by deleting the resource group. This will delete all of the resources contained in it so we don't use up our subscription credits. Notice how we don't have to specify the group because it has been set as a default:
 
 .. sourcecode:: powershell
 
