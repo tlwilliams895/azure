@@ -6,9 +6,9 @@
 Azure CLI Practical Fundamentals
 ================================
 
-The Azure CLI has been developed as an `open source <https://github.com/Azure/azure-cli>`_ cross-platform tool. Like the ``dotnet CLI`` it works the same whether you are executing it on Windows, Linux, or OSX through either of the supported shells, ``bash`` or ``PowerShell``. While it does not have the graphical help menus of the web GUI it does have a well organized pattern that makes "headless" navigation more intuitive than you may expect.
+The Azure CLI has been developed as an `open source <https://github.com/Azure/azure-cli>`_ cross-platform tool. Like the ``dotnet CLI`` it works the same whether you are executing it on Windows, Linux, or OSX through either BASH or PowerShell. While it does not have the graphical help menus of the web GUI it does have a well organized pattern that makes "headless" navigation more intuitive than you may expect.
 
-Just as with the GUI web portal the CLI will translate your command into an HTTP request that is sent to the Azure REST API. By default the responses received from the API will be outputted as formatted JSON but you can request other formats if needed. Every command will have its own output relative to the action that was taken and will either be a JSON object or a JSON list of objects.
+Just as with the GUI web portal the CLI will translate your command into an HTTP request that is sent to the Azure REST API. By default the responses received from the API will be printed as formatted JSON. Every command will have an output "shape" relative to the action that was taken and will either be a JSON object or a JSON list of objects.
 
 Installation
 ============
@@ -24,14 +24,14 @@ To install on Windows using PowerShell use the chocolatey package manager:
 
     > choco install az-cli -y
 
-Linux/Bash/ZSH
---------------
+Linux/BASH
+----------
 
-To install on most Linux machines using Bash or a related variant like ZSH use the respective package manager for that distribution. On Ubuntu you can use the ``apt`` package manager:
+To install on Linux machines you should refer to the commands of the respective package manager for its distribution. On Ubuntu you can use the ``apt`` package manager:
 
 .. sourcecode:: bash
 
-    $ apt update -y && apt install az-cli -y
+    $ apt install az-cli -y
 
 The Pattern
 ===========
@@ -63,22 +63,23 @@ That's a bit abstract so let's break down the example we saw earlier:
 Notice that the pattern is rather intuitive reading from left to right as "noun", "action", "customization". Or using the official terminology: 
 
     ``az [the program]`` + 
-    ``resource or service [Group/Sub-Group]`` + 
-    ``action to take [Command]`` + 
-    ``arguments to configure the action [Arguments]``
 
-One other consideration to keep in mind is the dependency order. At minimum a Group is needed to issue a command. In order to access a Sub-Group it naturally requires a parent Group to be defined before it. By extension Commands and theor Arguments are dependent on a Group or Sub-Group in the same way that verbs and adverbs have no meaning without a noun to apply to.
+    ``resource or service [Group/Sub-Group]`` + 
+
+    ``action to take [Command]`` + 
+
+    ``customize the action [Arguments]``
 
 Getting Help
 ============
 
-Another core aspect of the pattern in the ``az CLI`` is the use of a global ``help`` argument. Despite being a text-based interface it can be surprisingly informative and detailed. The ``help`` argument is attached to the end of any Group, Sub-Group, Command or combination among them. The help output depends on the context of what help is being requested but will often include sample examples of common use cases which can serve as a guide.
+Another core aspect of the ``az CLI`` pattern is the use of a global ``help`` argument. Despite being a text-based interface it can be surprisingly informative and detailed. The ``help`` argument is attached to the end of any Group, Sub-Group, Command or combination among them. The help output depends on the context of what help is being requested but will often include sample examples of common use cases which can serve as a guide.
 
 To use the ``help`` argument simply append ``--help`` or its shorthand ``-h`` to the end of any CLI command.
 
 .. tip::
 
-    You can think of the ``help`` argument as saying "help me with whatever is listed to the left of the help argument"
+    You can think of this structure as saying "help me understand whatever is listed to the left of the ``help`` argument"
 
 Let's see some generic examples of how the argument is used:
 
@@ -89,19 +90,19 @@ Let's see some generic examples of how the argument is used:
     # help with the tool itself (list available Groups and global Commands/Arguments)
     $ az --help
 
-    # help on a Group
+    # help on a Group (list Sub-Groups and Commands)
     $ az <group> --help
 
-    # help on a Sub-Group
+    # help on a Sub-Group (list Commands)
     $ az <group> <sub-group> --help
 
-    # help on a Group Command
+    # help on a Group Command (list Command Arguments)
     $ az <group> <command> --help
 
-    $ help on a Sub-Group Command
+    # help on a Sub-Group Command (list Command Arguments)
     $ az <group> <sub-group> <command> --help
 
-Notice how in each of these examples the pattern remains consistent in use. This makes it easy to build your understanding of the tool by digging through the help outputs through each Group, Sub-Group and Command. 
+Notice how in each of these the pattern remains consistent in use. This makes it easy to build your understanding of the tool one layer at a time by requesting help outputs through each Group, Sub-Group and Command. 
 
 As a concrete example let's consider how to request help about the ``vm`` Group:
 
@@ -111,12 +112,12 @@ As a concrete example let's consider how to request help about the ``vm`` Group:
     # or shorthand
     $ az vm -h
 
-While the CLI may feel foreign initially you can use the ``help`` argument at any time to guide you. It is in your best interest to practice digging through the Groups, Sub-Groups and Commands using the ``help`` argument to familiarize yourself. Eventually you will intuitively recall the commands and arguments you need but whenever you need a reminder the help command is just one argument away!
+While the CLI may feel foreign initially you can use the ``help`` argument at any time to guide you. It is in your best interest to practice digging through the Groups, Sub-Groups and Commands using the ``help`` argument to familiarize yourself.
 
 Groups
 ------
 
-Groups are the main resources and services that Azure CLI exposes control over. Some examples we will be using include:
+Groups are the main resources and services that the ``az CLI`` exposes control over. Some examples we will be using include:
 
 #. ``vm``: Virtual Machine management
 #. ``keyvault``: KeyVault management
@@ -126,9 +127,7 @@ Groups are the main resources and services that Azure CLI exposes control over. 
 
     For the purpose of explaining the organizational pattern we use the terms **Group**, **Sub-Group** and **Commands** to mirror the terminology used in the CLI and its official documentation. In practice when we refer to ``az group`` we will always mean **resource group**.
 
-You can see all of the Groups available in the ``az CLI`` by entering the following ``help`` argument (more on that later). Try entering this command in your terminal:
-
-.. todo:: will they already have the az CLI installed to issue this command?
+You can see all of the Groups available in the ``az CLI`` by requesting help about the CLI itself:
 
 .. sourcecode:: bash
 
@@ -137,7 +136,7 @@ You can see all of the Groups available in the ``az CLI`` by entering the follow
 Sub-Groups
 ----------
 
-Within each of these Groups will be Sub-Groups of features or properties related to the parent Group. For example under the Group ``vm`` you would find the related Sub-Group ``identity`` which refers to the VM identity configuration. Similarly under ``keyvault`` you would find the Sub-Group ``secret`` for managing KeyVault secrets.
+Within each of these Groups will be Sub-Groups that let you manage related features or properties of the Group resource. For example under the Group ``vm`` you would find the related Sub-Group ``identity`` which refers to the VM identity configuration. Similarly under ``keyvault`` you would find the Sub-Group ``secret`` for managing KeyVault secrets.
 
 You can use the ``help`` command on a specific Group to view the Sub-Groups related to it:
 
@@ -151,8 +150,8 @@ Try entering the following commands to see the Sub-Groups related to the ``vm`` 
 .. sourcecode:: bash
     :caption: vm and keyvault examples
 
-    $ az vm --help
-    $ az keyvault --help
+    $ az vm -h
+    $ az keyvault -h
 
 Commands
 --------
@@ -165,9 +164,9 @@ Commands are declaratively named actions that you can take on a Group or Sub-Gro
 - **U** - ``set``: update a property of a resource
 - **D** - ``delete``: delete the resource
 
-Just as before you can view the Commands associated with a Group or Sub-Group by using the ``help`` argument. Within the context of a Group or Sub-Group you may also see more specific commands. These additional commands represent actions that can be taken on the particular resource. In other cases the special commands are conveniences for quickly accessing common properties of a resource.
+Just as before you can view the Commands associated with a Group or Sub-Group by using the ``help`` argument. Within the context of a Group or Sub-Group you may also see commands that are specific to that resource. Some of these commands are shortcuts for common tasks.
 
-For example looking at the Commands related to the ``vm`` Group (by using the ``help`` argument) you will see many additional commands. Here are a few examples from the rather lengthy list:
+For example looking at the Commands related to the ``vm`` Group you will see many additional commands beyond the common CRUD ones. Here are a few examples from the rather lengthy list:
 
 .. sourcecode:: bash
     :caption: trimmed output of the many VM related commands
@@ -217,4 +216,4 @@ Note that these arguments can be exhaustive especially compared to what is avail
 Next Step
 =========
 
-Now that you understand the pattern for navigating and using the ``az CLI`` it's time to put it to use! In the :ref:`walkthrough-1_az-cli` you will get your first chance to provision resources without the web portal GUI. This is your first step towards the eventual goal of learning how to automate these tasks. As you go through the walkthrough think about how you can combine your knowledge of scripting with the ``az CLI`` commands.
+Now that you understand the pattern for navigating and using the ``az CLI`` it's time to put it to use! In the :ref:`walkthrough-1_az-cli` article you will get a chance to provision resources without using the web portal GUI. This is your first step towards the eventual goal of learning how to automate these tasks. As you go through the walkthrough think about how you can combine your knowledge of scripting to compose the individual ``az CLI`` commands.

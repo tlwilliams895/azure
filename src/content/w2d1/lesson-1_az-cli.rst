@@ -2,11 +2,11 @@
 
 .. _lesson-1_az-cli:
 
-==============================================
-Why Should We Use the CLI Over the Web Portal?
-==============================================
+================================================
+Why should we use a CLI instead of a web portal?
+================================================
 
-Up to this point we have been using the Azure Web Portal to provision and manage our Azure resources. Using the terminology we have learned we would refer to this site as a graphical user interface, or GUI. GUIs are convenient and intuitive to use but inherently fall behind the capabilities of their text-based counterpart -- the CLI.
+Up to this point we have been using the Azure Web Portal to provision and manage our Azure resources. Using the terminology we have learned we would refer to this site as a graphical user interface, or GUI. GUIs can be convenient and intuitive to use but inherently fall behind the capabilities of their text-based counterpart -- the CLI.
 
 The Azure Web Portal, with its intuitive layout and interactive menus, is actually just a "skin" that is backed by a comprehensive "brain" of a REST API. Any actions you take on the web portal to manage your Azure resources are ultimately fulfilled by HTTP requests sent `to this REST API <https://docs.microsoft.com/en-us/rest/api/azure/>`_. Can you think why they would develop a REST API that is distinct from the online GUI?
 
@@ -26,29 +26,29 @@ This difference seems arbitrary to you as the end user. It may appear to only bu
 #. internal development of new feature
 #. implement support in the Azure REST API
 #. implement support in the CLI
-#. implement support in the GUI
+#. implement support in the GUI (if at all)
 
 If a hot new Azure feature is released, which will take more time to become available for you to use, the GUI or CLI? Because of the relative complexity GUIs always take more time to develop than making an addition to the CLI. Which means you can expect access to the new feature to be released to the CLI before, if ever, the web interface is updated.
 
-And what about the more granular management tasks that you may need to perform on your resources? It stands to reason that priority in GUI development will always be given to the *most common* needs before reaching more granular or niche areas. Again, because of their simplicity, CLIs will have more more comprehensive features added to it that may never even reach the GUI. The only interface that exposes greater access to Azure resources over the CLI is the REST API itself.
+And what about the more granular management tasks that you may need to perform on your resources? It stands to reason that priority in GUI development will always be given to the *most common* needs before spending time developing the graphics to support more niche areas. Again, because of their simplicity, CLIs will have more more comprehensive features added to them that may never even reach the GUI.
 
 .. admonition:: Fun Fact
 
-    You can make requests directly to the REST API through any HTTP client like a browser, ``curl``, or the ``az CLI`` itself!
+    The only interface that exposes greater access to Azure resources over the CLI is the REST API itself. You can make requests directly to the REST API through any HTTP client like a browser, ``curl``, or the ``az CLI``. But most of the time it is a tedious process not meant for humans.
 
 There are two key takeaways here about a system, of which Azure is but one example, which supports both a GUI and CLI:
 
 - **the CLI will always receive the latest additions and updates before the GUI**
 - **the CLI will always have more granular management capabilities than its GUI counterpart**
 
-While the purpose of this lesson is to inspire your understanding and appreciation for CLIs they *are not always the best choice*. Sometimes GUIs offer an abstraction over more tedious work. Like most things in the development world you should not blindly adhere to a single approach. What is most important is selecting the tool that enables you to be more productive with your time. 
+While the purpose of this lesson is to inspire your understanding and appreciation for CLIs they *are not always the best choice*. Sometimes GUIs offer an abstraction over more tedious work that can make them worth using. Like most things in the development world you should not blindly adhere to a single approach. What is most important is to select the right tool for the job that empowers your workflow. 
 
 Work Velocity
 -------------
 
-When it comes to humans interacting with computers there is little doubt that GUIs are more pleasant to work with. But you are no mere human -- you are a technical powerhouse that has work to do! As a technical user your top priority is in choosing an interface that improves your workflow efficiency.
+When it comes to humans interacting with computers there is little doubt that GUIs are more intuitive to work with. But you are no mere human -- you are a technical powerhouse that has work to do! As a technical user your top priority is in choosing an interface that improves your workflow efficiency.
 
-On the whole CLIs are the speedier choice for power users. They trade ease of exploration, beneficial to newcomers, for brevity. Whereas GUIs excel in visually guiding you, CLI tools leave it to you to be the guide. CLIs require you to be direct and precise with what you need done and by doing so allow you to work more efficiently. 
+On the whole CLIs are the speedier choice for power users. They trade ease of exploration, beneficial to newcomers, for brevity and precise control. Whereas GUIs excel in visually guiding you, CLI tools leave it to you to be the guide. CLIs require you to be direct with what you need done but by doing so allow you to work more efficiently. 
 
 As an example, let's consider the process of provisioning a new VM from both the web GUI and the ``az CLI``.
 
@@ -65,9 +65,9 @@ Using the CLI you would need to open your terminal and enter a single command:
 
 .. sourcecode:: bash
 
-    $ az vm create <configuration option(s)>
+    $ az vm create <configuration options>
 
-On the one hand the GUI is helpful in providing visual cues and menus to guide you through the process. On the other hand the CLI allows you to skip directly to issuing exacty instructions for the work you need done. This example highlights the conciseness with regard to *manual* steps. But the real power of CLI tools comes in their automation capabilities.
+On the one hand the GUI is helpful in providing visual cues and menus to guide you through the process. On the other hand the CLI allows you to skip directly to issuing the exact instructions for the work you need done. This is just one example that highlights the conciseness with regard to *manual* steps. But the real power of CLI tools comes in their automation capabilities.
 
 Automation Showdown
 -------------------
@@ -90,11 +90,11 @@ Here is a basic example in PowerShell invoking the ``az CLI``:
     }
 
 
-Some of you might say, "Couldn't we write a browser script to automate navigating the web portal?" While this is possible it is significantly more complex than a 2-line loop. Worse yet is that GUIs, especially web-based ones, are more prone to updates and redesigns than CLIs. Which means if updates occur your script will likely break!
+Some of you might say, "Couldn't we write a browser script to automate navigating the web portal?" While this is possible it is significantly more complex than a 2-line loop. Worse yet is that GUIs, especially web-based ones, are more prone to updates and redesigns than CLIs. Which means if UI updates occur your script will likely break!
 
 This is just one of thousands of automation examples you will come across in your career. We will explore semi-automatic and fully-automatic automation approaches in the coming sections. For now you can take away an appreciation for the CLI, as foreign as it may seem initially, as it will soon become one of your closest allies. 
 
 Next Step
 =========
 
-At this point you must be enamored by the power of the ``az CLI``! No? Alright, well maybe after you see it in action you will be! Move on to the :ref:`lesson-2_az-cli` article to get it installed and learn about how to navigate and put it to use to control your Azure resources.
+At this point you must be enamored by the power of the ``az CLI``! No? Alright, well maybe after you see it in action you will be! Move on to the :ref:`lesson-2_az-cli` article to get it installed and learn how to put it to use to manage your Azure resources.
