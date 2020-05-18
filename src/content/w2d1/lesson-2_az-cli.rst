@@ -36,12 +36,22 @@ To install on Linux machines you should refer to the commands of the respective 
 The Pattern
 ===========
 
-The CLI is broken down into 4 main areas:
+The ``az CLI`` is organized into 4 components that build on each other:
 
 #. **Groups**: top-level services and resources
-#. **Sub-Groups**: services, properties or features related to their parent **Group**
-#. **Commands**: commands for managing a **Group** or **Sub-Group**
-#. **Arguments**: required and optional arguments for the **Command** to customize its behavior
+#. **Sub-Groups**: services, properties or features common to a parent **Group**
+#. **Commands**: commands specific to managing the **Group** or **Sub-Group**
+#. **Arguments**: required and optional arguments specific to the **Command** to customize its behavior
+
+Every command you issue will be made up of some combination of these components. As an example let's apply these labels to the command for creating a VM that we saw earlier:
+
+.. sourcecode:: bash
+
+    # Group: vm
+    # Sub-Group: none
+    # Command: create
+    # Arguments: configuration options
+    $ az vm create <configuration options>
 
 The general form of any command you enter will look like this:
 
@@ -51,29 +61,20 @@ The general form of any command you enter will look like this:
     # [optional argument] 
     $ az <group> [sub-group] <command> [command arguments]
 
-That's a bit abstract so let's break down the example we saw earlier:
-
-.. sourcecode:: bash
-
-    # Group: vm
-    # Sub-Group: none
-    # Command: create
-    $ az vm create <configuration arguments>
-
-Notice that the pattern is rather intuitive reading from left to right as "noun", "action", "customization". Or using the official terminology: 
+Notice that the pattern is rather intuitive reading from left to right as "target", "action", "customization". Or using the official terminology: 
 
     ``az [the program]`` + 
 
-    ``resource or service [Group/Sub-Group]`` + 
+    ``resource or service target [Group/Sub-Group]`` + 
 
-    ``action to take [Command]`` + 
+    ``action to take on the target [Command]`` + 
 
-    ``customize the action [Arguments]``
+    ``customizing options for the action [Arguments]``
 
 Getting Help
 ============
 
-Another core aspect of the ``az CLI`` pattern is the use of a global ``help`` argument. Despite being a text-based interface it can be surprisingly informative and detailed. The ``help`` argument is attached to the end of any Group, Sub-Group, Command or combination among them. The help output depends on the context of what help is being requested but will often include sample examples of common use cases which can serve as a guide.
+Another core aspect of the ``az CLI`` pattern is the use of a global ``help`` argument. Despite being a text-based interface it can be surprisingly informative and detailed. The ``help`` argument is attached to the end of any Group, Sub-Group, Command or combination among them. The help output will vary according to which components it is requested on but will often include examples of common use commands which can serve as a guide.
 
 To use the ``help`` argument simply append ``--help`` or its shorthand ``-h`` to the end of any CLI command.
 
@@ -125,9 +126,9 @@ Groups are the main resources and services that the ``az CLI`` exposes control o
 
 .. note:: 
 
-    For the purpose of explaining the organizational pattern we use the terms **Group**, **Sub-Group** and **Commands** to mirror the terminology used in the CLI and its official documentation. In practice when we refer to ``az group`` we will always mean **resource group**.
+    For the purpose of explaining the organizational pattern we use the terms **Group**, **Sub-Group** and **Commands** to mirror the terminology used in the help output and official documentation. In practice when we refer to "creating a group" with ``az group`` we will always mean **resource group**.
 
-You can see all of the Groups available in the ``az CLI`` by requesting help about the CLI itself:
+You can see all of the Groups and global Commands available in the ``az CLI`` by requesting help about ``az`` itself:
 
 .. sourcecode:: bash
 
@@ -188,7 +189,11 @@ Arguments
 
 Like most CLI tools commands also accept a series of Arguments, sometimes referred to as "flags" or "options". Think of these as modifiers for a given Command. They are used to give additional context or configure settings for performing a Command a specific way. The ``help`` argument is itself an example of one of these that happens to apply *globally* and not just for one Command.
 
-Just as Commands can be context-dependent on the Group or Sub-Group they are called on so too are the related Arguments. The ``help`` argument can be used on a Command to see the arguments associated with it. When reviewing the list of arguments take note of which arguments are **required** and which are **optional** -- typically only a handful are actually required.
+Just as Commands can be context-dependent on the Group or Sub-Group they are called on so too are the related Arguments. The ``help`` argument can be used on a Command to see the arguments associated with it. When reviewing the list of arguments take note of which arguments are **required** and which are **optional**. 
+
+.. note::
+
+    Typically only a handful are actually required to define or will have sensible default values set for you if you leave them out.
 
 For example to see the arguments associated with creating (``create``) a VM (``vm``) you can issue:
 
@@ -196,7 +201,7 @@ For example to see the arguments associated with creating (``create``) a VM (``v
 
     $ az vm create -h
 
-Note that these arguments can be exhaustive especially compared to what is available on the web portal. Don't be overwhelmed by them. They are always grouped and organized for easily finding which are relevant to your use case. 
+Note that these arguments can be exhaustive especially compared to what is available on the web portal. Don't be overwhelmed by them. They are organized for easily finding which are relevant to your use case. 
 
 .. todo:: seems out of scope to cover this, maybe best to just throw in as an example in the walkthroughs?
 
@@ -205,7 +210,7 @@ Note that these arguments can be exhaustive especially compared to what is avail
 
 .. As mentioned previously all commands issued from the ``az CLI`` are sent as requests to the Azure REST API with response bodies displayed as JSON output. These response bodies can range from simple objects to lists with dozens of complex objects of data. Working with large complex response bodies can be a tedious and time consuming process.
 
-.. Fortunately the ``az CLI`` includes a global option called ``--query`` which lets you transform the response body and hone in on just the data you need. The syntax used to define the transformation is a simple query language for JSON called JMESPath. We will not explore this syntax in great depth as it is beyond the scope of our learning goals. However, `the JMESPath documentation <https://jmespath.org/>`_ is well organized and has input boxes you can use to practice. 
+.. Fortunately the ``az CLI`` includes a global argument called ``--query`` that can be applied to any command. It lets you transform the response body and hone in on just the data you need. The syntax used to define the transformation is a simple query language for JSON called JMESPath. We will not explore this syntax in great depth as it is beyond the scope of our learning goals. However, `the JMESPath documentation <https://jmespath.org/>`_ is well organized and has input boxes you can use to practice. 
 
 .. What we will cover are the fundamentals which we will routinely use in our interactions with the ``az CLI``. The first step to using the ``--query`` option is to determine the shape of the data you are working with, which will be dependent on the command you issue. Fortunately there are only two types to consider as all of the commands will either output a single JSON object or a list containing multiple objects. 
 
