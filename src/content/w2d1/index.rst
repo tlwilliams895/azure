@@ -11,18 +11,18 @@ Lessons
 
 #. :ref:`lesson-1_az-cli`
 #. :ref:`lesson-2_az-cli`
-#. :ref:`lesson-3_ws-vm`
+#. :ref:`lesson-3_ws-iis`
 
 Walkthroughs
 ============
 
 #. :ref:`walkthrough-1_az-cli`
-#. :ref:`walkthrough-2_ws-vm`
+#. :ref:`walkthrough-2_ws-iis`
 
 Studios
 =======
 
-#. :ref:`studio-1_ws-vm`
+#. :ref:`studio-1_ws-iis`
 
 Resources
 =========

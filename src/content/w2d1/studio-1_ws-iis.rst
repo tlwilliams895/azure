@@ -1,6 +1,6 @@
 :orphan:
 
-.. _studio1_ws-cli-deployment:
+.. _studio-1_ws-iis:
 
 =====================================================
 Windows Server CLI Deployment of the CodingEvents API

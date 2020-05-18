@@ -1,7 +1,7 @@
 :orphan:
 
-.. _walkthrough-2_ws-vm:
+.. _walkthrough-2_ws-iis:
 
-================================
-Configuring Windows Server & IIS
-================================
+=======================================
+Deploying to IIS on a Windows Server VM
+=======================================
