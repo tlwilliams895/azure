@@ -24,7 +24,7 @@ You will see a configuration for Swagger on ``line 25``:
 
 .. sourcecode:: csharp
    :lineno-start: 25
-   :emphasis-lines: 31,32
+   :emphasize-lines: 31,32
    :caption: CodingEventsAPI/CodingEventsAPI.csproj
 
    services.AddSwaggerGen(
@@ -63,7 +63,7 @@ Clone your partner's repo. This time clone it into a different directory by pref
 
 Navigate to your partner's cloned repo directory from the command line. Once in the directory run the publish command to package the API into its executable. After publishing execute the published executable just as you did earlier.
 
-As the final step open the Swagger documentation page `https://localhost:5001`_ in your browser.
+As the final step open the Swagger documentation page `https://localhost:5001 <https://localhost:5001>`_ in your browser.
 
 .. admonition:: Question
 
