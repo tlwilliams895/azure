@@ -219,4 +219,4 @@ Note that these arguments can be exhaustive especially compared to what is avail
 Next Step
 =========
 
-Now that you understand the pattern for navigating and using the ``az CLI`` it's time to put it to use! In the :ref:`walkthrough1` article you will get a chance to provision resources without using the web portal GUI. This is your first step towards the eventual goal of learning how to automate these tasks. As you go through the walkthrough think about how you can combine your knowledge of scripting to compose the individual ``az CLI`` commands.
+Now that you understand the pattern for navigating and using the ``az CLI`` it's time to put it to use! In the :ref:`walkthrough_az-cli` article you will get a chance to provision resources without using the web portal GUI. This is your first step towards the eventual goal of learning how to automate these tasks. As you go through the walkthrough think about how you can combine your knowledge of scripting to compose the individual ``az CLI`` commands.
