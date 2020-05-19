@@ -7,7 +7,8 @@ Introduction to the Azure CLI & Windows Server Deployment
 
    intro
    cli-fundamentals
-   ws-iis
-   walkthrough1
-   walkthrough2
+   walkthrough_az-cli
+   ws
+   iis
+   walkthrough_ws-iis
    studio

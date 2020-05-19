@@ -1,4 +1,4 @@
-.. _walkthrough2:
+.. _walkthrough_ws-iis:
 
 ======================================
 Walkthrough: Windows Server Deployment
