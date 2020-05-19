@@ -1,4 +1,4 @@
-.. _cli-pattern:
+.. _cli-fundamentals:
 
 ================================
 Azure CLI Practical Fundamentals

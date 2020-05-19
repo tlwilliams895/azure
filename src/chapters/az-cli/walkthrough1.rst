@@ -1,8 +1,8 @@
 .. _walkthrough1:
 
-==========================================
-Provisioning Resources Using the Azure CLI
-==========================================
+=======================================================
+Walkthrough: Provisioning Resources Using the Azure CLI
+=======================================================
 
 In this walkthrough we will practice using the ``az CLI`` to provision the same resources that we spun up using the web portal GUI. As you work through these commands try to picture the manual steps you performed on the web portal and use your knowledge of the ``az CLI`` patterns to translate those steps into CLI commands.
 

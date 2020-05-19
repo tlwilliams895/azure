@@ -6,7 +6,7 @@ Introduction to the Azure CLI & Windows Server Deployment
    :maxdepth: 3
 
    intro
-   cli-pattern
+   cli-fundamentals
    ws-iis
    walkthrough1
    walkthrough2
