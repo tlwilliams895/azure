@@ -1,3 +1,5 @@
+.. _intro_az-cli:
+
 ================================================
 Why should we use a CLI instead of a web portal?
 ================================================
@@ -97,4 +99,4 @@ This is just one of thousands of automation examples you will come across in you
 Next Step
 =========
 
-At this point you understand the strengths of CLI tools like the ``az CLI`` and are ready to see how it can be used. In the :ref:`cli-fundamentals` article we will explore how its commands are organized and used to manage your Azure resources.
+At this point you understand the strengths of CLI tools like the ``az CLI`` and are ready to see how it can be used. In the :ref:`az-cli-fundamentals` article we will explore how its commands are organized and used to manage your Azure resources.

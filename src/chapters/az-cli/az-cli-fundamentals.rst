@@ -1,4 +1,4 @@
-.. _cli-fundamentals:
+.. _az-cli-fundamentals:
 
 ================================
 Azure CLI Practical Fundamentals

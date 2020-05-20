@@ -1,14 +1,10 @@
-=========================================================
-Introduction to the Azure CLI & Windows Server Deployment
-=========================================================
+=============
+The Azure CLI
+=============
 
 .. toctree::
    :maxdepth: 3
 
-   intro
-   cli-fundamentals
+   intro_az-cli
+   az-cli-fundamentals
    walkthrough_az-cli
-   ws
-   iis
-   walkthrough_ws-iis
-   studio
