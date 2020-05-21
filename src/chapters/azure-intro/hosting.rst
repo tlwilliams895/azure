@@ -53,7 +53,7 @@ And from here we can simply run our application with just the ``dotnet`` runtime
 
 .. image:: /_static/images/azure-intro-hosting/dotnet-base-mvc.png
 
-The files that are created by our source code are known as **Build Artifcats**.
+The files that are created by our source code are known as **Build Artifacts**.
 
 Although these examples are still local they serve as a representation of how we will run our application on a server.
 

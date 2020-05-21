@@ -1,7 +1,7 @@
 Networking
 ==========
 
-In this class we will cover the basics of networking. Networking is an important topic it is a vast concept, and can get complicated. You will continue learning about networking throughout your career.
+In this class we will cover the basics of networking. Networking is an important and vast concept. Networking quickly gets complicated when you move beyond the basics. We will only cover the basics in this class, however you will continue learning about networking throughout your career.
 
 **Networking** is the process of connecting machines together to communicate information.
 
@@ -16,7 +16,7 @@ Intranets are private networks that range from local networks like in your home 
 IP Addresses
 ------------
 
-An **Internet Protocol Address** (IP address) is the unique identification of each comptuer/device connected to a network. IP Addresses follow a specific numerical pattern. No two computers/devices can have the same IP address at the same time because the IP address of a machine is a unique identification of the machine on the network.
+An **Internet Protocol Address** (IP address) is the unique identification of each comptuer/device connected to a network. All IP Addresses follow a specific numerical pattern. 
 
 The pattern of an IP address always follows ``xxx.xxx.xxx.xxx`` where the 'x's can be replaced by integers between 0 and 255.
 
@@ -33,10 +33,14 @@ Examples of valid IP addresses:
 
 You have already worked with one special IP address the **loopback** IP Address. The loopback IP Address is represented as ``127.0.0.1`` and when requests are made to this address the request is sent back to the machine that made the request. We have done this throughout the class when running our C#.NET web applications, and to access the web app we would make a request to 127.0.0.1 in our browser.
 
+.. admonition: fun fact
+
+   The Loopback Interface was designed specifically for developers to simulate networking from within a single host machine. The IP address ``127.0.0.1`` or *home IP* is mapped to the aptly named host name ``localhost`` which you have undoubtedly used many times!
+
 Local Area Network
 ------------------
 
-A **Local Area Network** (LAN) is a network that connects all the computers/devices in a relatively small geographic location. You probably have a LAN in your place of residence, it may connect your computer, your smart phone, your printer, and anyone else in your house together on one network. Using the LAN you can send a print job from your computer to your printer and it may respond by printing the sent documents. Using your LAN you can access a shared hard drive, or move files between different devices.
+A **Local Area Network** (LAN) is a private network that connects all the computers/devices in a relatively small geographic location. You probably have a LAN in your place of residence, it may connect your computer, your smart phone, your printer, and anyone else in your house together on one network. Using the LAN you can send a print job from your computer to your printer and it may respond by printing the sent documents. Using your LAN you can access a shared hard drive, or move files between different devices.
 
 Examples of places that may have a LAN:
 
@@ -52,27 +56,49 @@ Examples of places that may have a LAN:
 Private IP Addresses
 ^^^^^^^^^^^^^^^^^^^^
 
-A **private IP address** is an IP Address that identifies a device on a LAN.
+A **private IP address** is an IP Address that identifies a device within a LAN.
 
-An example of a private IP Addresses in a LAN would be your house. Your router acts as the device that manages the network. Since it's a device it gets a private IP address that makes it acessible to all the other devices on the LAN. The router may be assigned the private IP address ``192.168.0.1``. Once you connect a computer to the router via an ethernet cable, or by connecting to the router's wireless access point via a wireless card, the router will assign a private IP address to the device it may assign it the private IP address ``192.168.0.2``.
+Consider the LAN in a home. Any computer or device connects to the LAN by communicating with a router. The router is responsbile for providing private IP addresses to each computer or device. The LAN gives each computer or device the ability to communicate with each other, however the LAN does not have access to the internet yet. The router must be connected to the internet via an Internet Services Provider (ISP). The ISP delegates one public IP address to your router which is used when any computer or device makes a request to the internet.
+
+
+Wide Area Network
+-----------------
+
+A **Wide Area Network** (WAN) is a private network, or collection of connected private networks, that connect computers and devices in a large geographic location. Just like a LAN it doles out a unique private IP address to every device on the WAN.
+
+One major difference between a WAN, and a LAN is that a WAN commonly uses public infrastructure to establish a connection between two or more private LANs. This is how the WAN can cover such a large geographic area.
+
+Examples of places that may have a WAN:
+
+- city
+- public transict like a Metro
+- organization with multiple office buildings
+- state
+- country
+
+
 
 Internet
 --------
 
-The **internet** is a collection of inter-connected networks. You are probably using the internet right now to view this curriculum. The internet is more complex than the first sentence let's on, but we will abstract as much as possible to not venture out of scope for this class.
+The **internet** is a collection of inter-connected public networks. You can think of the internet as a very large publicly accesible WAN.
 
-To access the internet you must go through an **Internet Service Provider (ISP)** an organization that controls a network that is alrady configured as one of the networks on the internet. Your ISP will provide you with an IP address on their network, that has access to the greater internet.
+To access the internet you must go through an **Internet Service Provider (ISP)** an organization that controls a network that is already configured as one of the networks on the internet. Your ISP will provide you with an IP address on their network, that has access to the greater internet.
 
-Once you have been delgated a public IP address from your ISP you can access other computers, or servers on the greater internet. For example to view the curriculum of this class you opened a web browser, navigated to ``education.launchcode.org`` to access the website that hosts the curriculum of this class.
+Once you have been delgated a public IP address from your ISP you can access other computers, or servers on the greater internet. For example to view the curriculum of this class you opened a web browser and navigated to ``education.launchcode.org``.
 
 Public IP Addresses
 ^^^^^^^^^^^^^^^^^^^
 
-A **public IP address** is an IP Address that identifies an end-user, service, or server on the greater internet.
+A **public IP address** is an IP Address that uniquely identifies end-users and servers on the greater internet. End-users are the consumers, or people that access the internet. Servers refer to the machines that host websites, web applications, and services. Both the end users and these machines need to have unqiue IP addresses.
 
-You are given a public IP address by your ISP when you connect to the internet through one. Every time you make a request to a website, web app, or service your public IP address is sent with the request so the website, web app, or service know where to send the response.
+You are given a public IP address by your ISP when you connect to the internet through one. Every time you make a request to a website, web app, or service your public IP address is sent with the request so the website, web app, or service know where to send their response.
 
-Additionally, every website, web app, or service on the internet has a public IP address. When you want to access the website, web app, or service you must make a request to their public IP address. Since you probably don't have every public IP address memorized you usually refer to it by it's domain name.
+.. admonition:: note
+
+   Even though every machine on the internet has an IP address, not every machine or network is configured 
+
+Additionally, every website, web app, or service on the internet is hosted on a a machine and each machine has a public IP address. When you want to access the website, web app, or service you must make a request to their machine's public IP address. To simplfy this process, instead of using public IP Addresses we typically use a domain name.
 
 A **Domain Name System** is a naming system for IP addresses, and domain names. 
 
