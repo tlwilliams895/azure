@@ -1,14 +1,22 @@
 Networking
 ==========
 
-With the abbreviated timeline of this course we don't have the luxury to go into Networking as it's own topic. However, understanding some of the most basic elements of networking is crucial to working with Cloud Service Providers. After taking this course we would recommend you to continue your own education of networking to prepare yourselves for your job, however we will cover the bare essentials for you to work through this curriculum.
+In this class we will cover the basics of networking. Networking is an important topic it is a vast concept, and can get complicated. You will continue learning about networking throughout your career.
 
-**Networking** is the process of connecting multiple computers together. Networking includes the physical hardware (cables, computers, routers, etc), and the internal software configuration (IP addresses, access control, visibility, etc). Networking refers to both private networks (home network, office network), and public networks (the internet, a university/organization intranet).
+**Networking** is the process of connecting machines together to communicate information.
+
+Networking refers to both private networks (home network, office network), and public networks (the internet, a university/organization intranet).
+
+There are two types of networks:
+- Private Intranets
+- Public Internet
+
+Intranets are private networks that range from local networks like in your home to wider corporate networks that span multiple locations. Modern intranets also include private virtual networks that can be provisioned and managed from CSPs like Azure. The internet itself is a public world-wide network that interconnects machines across homes, companies and governments.
 
 IP Addresses
 ------------
 
-An **Internet Protocol Address** (IP address) is a unique identification of each comptuer/device connected to a network that follows a specific numerical pattern.
+An **Internet Protocol Address** (IP address) is the unique identification of each comptuer/device connected to a network. IP Addresses follow a specific numerical pattern. No two computers/devices can have the same IP address at the same time because the IP address of a machine is a unique identification of the machine on the network.
 
 The pattern of an IP address always follows ``xxx.xxx.xxx.xxx`` where the 'x's can be replaced by integers between 0 and 255.
 
@@ -22,6 +30,8 @@ Examples of valid IP addresses:
 .. admonition:: note
 
    For the purposes of this class we will only work with IPv4 addresses. It should be noted that a new format for IP addresses (IPv6) is also used, but goes beyond the scope of this class. Everything you learn about IPv4 addresses in this class can be applied directly to IPv6 addresses with the exception of the numbering pattern.
+
+You have already worked with one special IP address the **loopback** IP Address. The loopback IP Address is represented as ``127.0.0.1`` and when requests are made to this address the request is sent back to the machine that made the request. We have done this throughout the class when running our C#.NET web applications, and to access the web app we would make a request to 127.0.0.1 in our browser.
 
 Local Area Network
 ------------------
