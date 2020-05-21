@@ -96,7 +96,7 @@ You are given a public IP address by your ISP when you connect to the internet t
 
 .. admonition:: note
 
-   Even though every machine on the internet has an IP address, not every machine or network is configured 
+   Even though every machine on the internet has an IP address, not every machine or network is configured to be accessed via the internet. Your LAN has a public IP address, but is not configured to be accessed by end users of the internet. If someone else makes a request to your public IP address it will be shut down by your router, and no payload will be sent back to whoever made the request. This is true for all machines on the internet. They must first be configured to allow traffic through before websites, web apps, or services can be accessed through the internet.
 
 Additionally, every website, web app, or service on the internet is hosted on a a machine and each machine has a public IP address. When you want to access the website, web app, or service you must make a request to their machine's public IP address. To simplfy this process, instead of using public IP Addresses we typically use a domain name.
 
@@ -115,8 +115,8 @@ Processes & Ports
 
 As a final precursor to web hosting we need to learn a little about computer processes and the ports they are bound to.
 
-Process
--------
+Server Processes
+----------------
 
 A computer **process** is an actively running instance of a program. Every time you launch an application on your computer the operating system creates at least one process that runs the entire time the application is open. When you run your code, similarly the operating system creates at least one process for your application code, the process will stay alive until the application starts running. Anytime an application is open, running, or idling in the background the operating system has at least one process running managing the applications access to the operating system, and hardware.
 
