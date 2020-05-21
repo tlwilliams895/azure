@@ -4,7 +4,7 @@ Walkthrough: Running Code Anywhere
 
 So far you have been writing and running your code on your **local machine**. This works well for development but in order to *host your application* on the internet you will need to run it on a **remote machine**. 
 
-Recall that when we **publish** our application we are creating a set of files that we can use to run it. Once we have published the application we gain the benefit of portability. We can take that executable bundle of files and run it on any other machine.
+Recall that when we **publish** our application we are creating build artifacts that we can use to run our application. Once we have published the application we gain the benefit of portability. We can take those build artifacts and run it on any other machine that has the .NET runtime.
 
 In today's studio we're going to practice the steps needed to run code on a different machine than where it was written. Each of you will partner with another student to practice cloning, publishing, executing, and connecting to each other's applications.
 
