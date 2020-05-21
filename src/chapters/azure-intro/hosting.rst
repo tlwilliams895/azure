@@ -53,6 +53,8 @@ And from here we can simply run our application with just the ``dotnet`` runtime
 
 .. image:: /_static/images/azure-intro-hosting/dotnet-base-mvc.png
 
+The files that are created by our source code are known as **Build Artifcats**.
+
 Although these examples are still local they serve as a representation of how we will run our application on a server.
 
 The steps to run a project on a server are:
@@ -85,6 +87,4 @@ You can setup  your own servers and configure them to always be on, and to have 
 
 Using Azure we can easily, quickly, and cheaply start up our own server that has a public IP address, is always on, and can be configured with a DNS.
 
-After creating a server, we will be able to copy over our Build Artifacts we created using ``dotnet publish``, and then run our application. It will then be accesible via the internet at a publicc IP address, and it will always be on and running. This allows our users to interface with our application. 
-
-.. note:: go into them as issues -- what is the networking issue, how does the Cloud Services Provider handle networking
+After creating a server, we will be able to copy over our Build Artifacts we created using ``dotnet publish``, and then run our application. It will then be accesible via the internet at a public IP address, and it will always be on and running. This allows our users to interface with our application. 
