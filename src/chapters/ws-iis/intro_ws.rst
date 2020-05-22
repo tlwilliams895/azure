@@ -11,13 +11,15 @@ Today we will learn about the other choice of OS for hosting our web application
 A Native Server OS
 ==================
 
-Windows Server (WS) is built on top of the same base as the PC-grade Windows 10 operating system. While there are many Windows 10 editions for different use cases none of them are optimized for server workloads like WS. Servers naturally have greater operational demand than PCs so their OS needs to be able to manage greter memory and CPU allocations.
+Windows Server (WS) is built on top of the same base as the PC-grade Windows 10 operating system but has been customized for use as a server. While there are many Windows 10 editions from consumer to enterprise none of them are optimized for server workloads like WS. Servers naturally have greater operational demand than PCs. As a result WS has been designed to manage significantly greater memory and CPU allocations than what someone would run on a PC -- even a decked out gaming rig.
 
 .. admonition:: fun fact
 
-    Windows Server is capable of managing an incredible 24 **terabytes** of RAM and *any number* of CPU cores!
+    Windows Server is capable of managing an incredible 24 **terabytes** of RAM and *any number* of CPU cores! But can it run Crysis?
 
-Because WS is designed for computing it strips away many of the applications and features that are meant for PCs. The result is a smaller OS footprint that reduces resource usage -- something that may seem small for individual machines but results in appreciable savings when managing large fleets of servers. A smaller OS also means less code to consider for potential vulnerabilities. The reduced attack surface of the slimmer OS is complemented by sensible firewall defaults and other restrictions that further bolster its security.
+Because WS is designed for computing it strips away many of the applications and features that are meant for PCs. The result is a smaller OS footprint that reduces resource usage. These savings may seem small for individual machines but can be appreciable when managing large fleets of servers. 
+
+A smaller OS also means less code to monitor for and protect against potential vulnerabilities. The reduced attack surface of the slimmer OS is complemented by sensible firewall defaults and other restrictions that further bolster its security profile relative to a PC.
 
 Installation Options
 --------------------
@@ -30,7 +32,7 @@ The default Windows Server VM image includes a full GUI shell just like Windows 
 WS Core
 ^^^^^^^
 
-Windows Server also comes in a **Core** option which removes the desktop GUI entirely! Windows Server Core is even leaner than WS Desktop allowing you to start *from the core* and add just the features and applications you need. Windows Server Core represents an *unopinionated* server OS that leaves it to you to customize exactly what is needed for your use case. You can read more about the WS Core design and comparison to the more opinionated WS Desktop Experience `in this article<https://docs.microsoft.com/en-us/windows-server/administration/server-core/what-is-server-core>`_. 
+Windows Server also comes in a nearly headless **Core** option which removes the majority of the desktop GUI leaving only a PowerShell terminal! Windows Server Core is even leaner than WS Desktop allowing you to start *from the core* and add just the features and applications you need. Windows Server Core represents an *unopinionated* server OS that leaves it to you to customize exactly what is needed for your use case. You can read more about the WS Core design and comparison to the more opinionated WS Desktop Experience `in this article<https://docs.microsoft.com/en-us/windows-server/administration/server-core/what-is-server-core>`_. 
 
 Server Manager
 --------------
@@ -65,7 +67,7 @@ Recall that both the Azure CLI and the web portal GUI are backed by the same RES
 
     Unlike the browser console you can use the ``az CLI`` to issue RunCommands to *multiple machines at once* using their resource IDs!
 
-Within the Azure CLI the ``vm`` Sub-Group ``run-command`` can be used to toggle commonly used settings or execute complete scripts remotely. Every RunCommand command corresponds to a unique ID which you can ``list``:
+Within the Azure CLI the ``vm`` Sub-Group ``run-command`` can be used to toggle commonly machine settings or execute complete scripts remotely. Every RunCommand command corresponds to a unique ID which you can view using ``list``:
 
 .. sourcecode:: powershell
     :caption: assumes the default location has been configured
